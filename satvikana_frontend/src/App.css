@@ -530,22 +530,13 @@ a {
 /* Responsive Media Queries */
 @media (max-width: 900px) {
   .header-main {
-    flex-direction: column;
-    justify-content: center;
-    padding: 15px 20px;
+    padding: 10px 20px;
+    gap: 10px;
   }
   
-  .header-left, .header-center, .header-right {
-    width: 100%;
-    justify-content: center;
+  .header-center .logo {
+    height: 60px;
   }
-  
-  .header-center {
-    order: -1; /* Logo goes top */
-    margin-bottom: 10px;
-  }
-  
-  /* .hero h1 removed */
   
   .footer-content {
     flex-direction: column;
@@ -562,6 +553,24 @@ a {
 }
 
 @media (max-width: 600px) {
+  .top-bar {
+    font-size: 0.75rem;
+    padding: 6px 10px;
+    letter-spacing: 0.5px;
+  }
+
+  .header-main {
+    padding: 8px 15px;
+  }
+  
+  .header-center .logo {
+    height: 48px;
+  }
+
+  .header-right {
+    gap: 12px !important;
+  }
+  
   .newsletter {
     flex-direction: column;
   }
