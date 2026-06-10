@@ -5,7 +5,7 @@ const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
-    fetch('https://end.onrender.com/api/products/')
+    fetch('https://satvikana-backend.onrender.com/api/products/')
       .then(res => res.json())
       .then(data => setProducts(data))
       .catch(err => console.error(err));

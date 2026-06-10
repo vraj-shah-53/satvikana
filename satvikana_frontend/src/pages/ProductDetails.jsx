@@ -8,7 +8,7 @@ const ProductDetails = () => {
   const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
-    fetch(`https://na-backend.onrender.com/api/products/${id}/`)
+    fetch(`https://satvikana-backend.onrender.com/api/products/${id}/`)
       .then(res => res.json())
       .then(data => setProduct(data))
       .catch(err => console.error(err));
