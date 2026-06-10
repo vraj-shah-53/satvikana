@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { Eye, EyeOff } from 'lucide-react';
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({ username: '', email: '', password: '' });
   const [errorMSG, setErrorMSG] = useState('');
   const [successMSG, setSuccessMSG] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   
   const token = localStorage.getItem('satvikana_token');
   const userStr = localStorage.getItem('satvikana_user');
@@ -254,7 +256,38 @@ const Auth = () => {
             <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email Address" style={inputStyle} required={!isLogin} />
           )}
           <input type="text" name="username" value={formData.username} onChange={handleChange} placeholder="Username" style={inputStyle} required />
-          <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" style={inputStyle} required />
+          <div style={{ position: 'relative', width: '100%' }}>
+            <input 
+              type={showPassword ? "text" : "password"} 
+              name="password" 
+              value={formData.password} 
+              onChange={handleChange} 
+              placeholder="Password" 
+              style={{ ...inputStyle, width: '100%', paddingRight: '50px', boxSizing: 'border-box' }} 
+              required 
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              style={{
+                position: 'absolute',
+                right: '15px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                color: 'var(--text-secondary)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '0',
+                zIndex: 5
+              }}
+            >
+              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+            </button>
+          </div>
           <button type="submit" className="shop-btn" style={{ marginTop: '10px', width: '100%' }}>
             {isLogin ? 'Sign In' : 'Sign Up'}
           </button>

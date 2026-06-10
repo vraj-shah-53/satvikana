@@ -15,7 +15,7 @@ const OrderHistory = () => {
 
     const fetchOrders = async () => {
       try {
-        const res = await fetch('https://end.onrender.com/api/orders/', {
+        const res = await fetch('https://satvikana-backend.onrender.com/api/orders/', {
           headers: {
             'Authorization': `Token ${token}`,
             'Content-Type': 'application/json'

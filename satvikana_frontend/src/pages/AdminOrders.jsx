@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Eye, EyeOff } from 'lucide-react';
 
 const AdminOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -9,6 +10,7 @@ const AdminOrders = () => {
   const [adminEmail, setAdminEmail] = useState('');
   const [adminPassword, setAdminPassword] = useState('');
   const [loginError, setLoginError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const token = localStorage.getItem('satvikana_token');
   const userStr = localStorage.getItem('satvikana_user');
@@ -159,14 +161,37 @@ const AdminOrders = () => {
               style={inputStyle} 
               required 
             />
-            <input 
-              type="password" 
-              placeholder="Password" 
-              value={adminPassword} 
-              onChange={(e) => setAdminPassword(e.target.value)} 
-              style={inputStyle} 
-              required 
-            />
+            <div style={{ position: 'relative', width: '100%' }}>
+              <input 
+                type={showPassword ? "text" : "password"} 
+                placeholder="Password" 
+                value={adminPassword} 
+                onChange={(e) => setAdminPassword(e.target.value)} 
+                style={{ ...inputStyle, paddingRight: '50px' }} 
+                required 
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                style={{
+                  position: 'absolute',
+                  right: '15px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  color: 'var(--text-secondary)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: '0',
+                  zIndex: 5
+                }}
+              >
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </button>
+            </div>
             <button type="submit" className="shop-btn" style={{ width: '100%', padding: '15px', marginTop: '10px' }}>
               Sign In as Admin
             </button>
