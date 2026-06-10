@@ -41,7 +41,19 @@ const Products = () => {
           <div key={product.id} className="testimonial-card" style={{ width: '100%', textAlign: 'center', position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <Link to={`/product/${product.id}`} style={{ display: 'block', color: 'inherit', textDecoration: 'none', flex: 1 }}>
               <div style={{ height: '240px', marginBottom: '20px', borderRadius: '10px', overflow: 'hidden', background: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '15px' }}>
-                <img src={product.image ? (product.image.startsWith('http') ? product.image : `https://satvikana-backend.onrender.com${product.image}`) : "/best_image.png"} alt={product.name} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+                <img
+  src={
+    product.image
+      ? `/${product.image.split('/').pop()}`
+      : "/best_image.png"
+  }
+  alt={product.name}
+  style={{
+    maxWidth: '100%',
+    maxHeight: '100%',
+    objectFit: 'contain'
+  }}
+/>
               </div>
               <h3 style={{ fontSize: '1.2rem', marginBottom: '10px', transition: 'color 0.3s', minHeight: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 {product.name.split('|')[0]}

@@ -21,7 +21,19 @@ const ProductDetails = () => {
       <Link to="/products" style={{ color: 'var(--primary-color)', marginBottom: '30px', display: 'inline-block', fontWeight: 'bold' }}>&larr; Back to Products</Link>
       <div style={{ display: 'flex', gap: '50px', flexWrap: 'wrap', background: 'var(--surface-color)', padding: '40px', borderRadius: '20px', boxShadow: 'var(--shadow-custom)', border: '1px solid var(--border-color)' }}>
         <div style={{ flex: '1', minWidth: '300px', borderRadius: '20px', overflow: 'hidden', background: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '30px', border: '1px solid var(--border-color)' }}>
-          <img src={product.image ? (product.image.startsWith('http') ? product.image : `https://satvikana-backend.onrender.com${product.image}`) : "/best_image.png"} alt={product.name} style={{ maxWidth: '100%', maxHeight: '400px', objectFit: 'contain' }} />
+          <img
+  src={
+    product.image
+      ? `/${product.image.split('/').pop()}`
+      : "/best_image.png"
+  }
+  alt={product.name}
+  style={{
+    maxWidth: '100%',
+    maxHeight: '400px',
+    objectFit: 'contain'
+  }}
+/>
         </div>
         <div style={{ flex: '1', minWidth: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
           <h1 style={{ fontSize: '3rem', marginBottom: '15px', color: 'var(--primary-color)' }}>{product.name.split('|')[0]}</h1>
