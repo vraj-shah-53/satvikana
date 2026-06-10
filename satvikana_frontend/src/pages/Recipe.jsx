@@ -144,7 +144,7 @@ const Recipe = () => {
 
             {/* Accordion Expansion containing Instructions */}
             <div style={{ 
-              maxHeight: expandedId === recipe.id ? '1000px' : '0', 
+              maxHeight: expandedId === recipe.id ? '2500px' : '0', 
               transition: 'max-height 0.6s ease-in-out', 
               overflow: 'hidden',
               background: '#FAFAFA'
