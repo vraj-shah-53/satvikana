@@ -20,13 +20,9 @@ const Home = () => {
 
   return (
     <div>
-      {/* Hero Section */}
-      <section className="hero">
-        <img src="/best_image.png" alt="Best Makhana" className="hero-img" />
-        <div className="hero-content">
-          <h1>Experience the Crunch of Health</h1>
-          <p>Indulge in the finest, health-rich flavours of Satvikana. From farm to your snack bowl.</p>
-        </div>
+      {/* Hero Banner Section */}
+      <section className="hero-banner-container">
+        <img src="/home_banner.png" alt="Satvikana Banner" className="hero-banner-img" />
       </section>
 
       <section className="slider-container">
@@ -35,8 +31,8 @@ const Home = () => {
           <div className="slider-track" style={{ display: 'flex', transition: 'transform 0.8s ease-in-out', transform: `translateX(-${currentSlide * 100}%)` }}>
             {products.length > 0 ? products.slice(0, 5).map(product => (
               <div key={product.id} className="slider-item" style={{ minWidth: '100%', position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '20px 20px 60px 20px' }}>
-                <div style={{ height: '300px', width: '100%', overflow: 'hidden', borderRadius: '15px', marginBottom: '20px', boxShadow: '0 5px 15px rgba(0,0,0,0.1)', position: 'relative' }}>
-                  <img src="/best_image.png" alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <div style={{ height: '300px', width: '100%', overflow: 'hidden', borderRadius: '15px', marginBottom: '20px', boxShadow: '0 5px 15px rgba(0,0,0,0.1)', position: 'relative', backgroundColor: '#FFFFFF' }}>
+                  <img src={product.image ? (product.image.startsWith('http') ? product.image : `http://127.0.0.1:8000${product.image}`) : "/best_image.png"} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                 </div>
                 <h3 style={{ fontSize: '1.6rem', marginBottom: '15px', color: 'var(--text-primary)', textAlign: 'center', maxWidth: '90%' }}>{product.name.split('|')[0]}</h3>
                 <Link to={`/product/${product.id}`} style={{ zIndex: 10 }}>
@@ -45,8 +41,8 @@ const Home = () => {
               </div>
             )) : [1,2,3,4,5].map(i => (
               <div key={i} className="slider-item" style={{ minWidth: '100%', position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '20px 20px 60px 20px' }}>
-                <div style={{ height: '300px', width: '100%', overflow: 'hidden', borderRadius: '15px', marginBottom: '20px', position: 'relative' }}>
-                  <img src="/best_image.png" alt={`Flavour ${i}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <div style={{ height: '300px', width: '100%', overflow: 'hidden', borderRadius: '15px', marginBottom: '20px', position: 'relative', backgroundColor: '#FFFFFF' }}>
+                  <img src="/best_image.png" alt={`Flavour ${i}`} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                 </div>
                 <h3 style={{ fontSize: '1.6rem', marginBottom: '15px', color: 'var(--text-primary)', textAlign: 'center', maxWidth: '90%' }}>Premium Makhana Flavour {i}</h3>
                 <button className="shop-btn" style={{ zIndex: 10, padding: '12px 30px', fontSize: '1rem', boxShadow: '0 8px 25px rgba(212, 136, 6, 0.3)' }}>Shop Now</button>
@@ -63,7 +59,7 @@ const Home = () => {
 
       {/* Photos Section */}
       <section className="photos-section">
-        <div className="photo-panel">
+        <div className="photo-panel kid-panel">
           <img src="/kid.jpeg" alt="Kid loving Makhana" />
           <div className="photo-overlay">
             <h3>Joy in Every Bite</h3>
@@ -92,6 +88,27 @@ const Home = () => {
             <strong>Why is Makhana great for your body?</strong><br/>
             Makhana (Fox Nuts) are considered a superfood in Ayurveda. They are packed with essential proteins, fiber, potassium, and magnesium. Eating makhana supports heart health, aids in weight loss, and provides anti-aging properties thanks to high antioxidant levels. It's a low-caloric, gluten-free snack that keeps you full and energized throughout the day!
           </p>
+        </div>
+      </section>
+
+      {/* Khapli Wheat Info Section */}
+      <section className="khapli-section" style={{ padding: '80px 20px', display: 'flex', flexWrap: 'wrap', gap: '50px', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ flex: '1.2', minWidth: '300px', maxWidth: '650px', borderRadius: '20px', overflow: 'hidden', boxShadow: 'var(--shadow-custom)' }}>
+          <img src="/khapli_story.jpg" alt="The Story of Khapli Wheat" style={{ width: '100%', height: 'auto', display: 'block' }} />
+        </div>
+        <div style={{ flex: '1', minWidth: '300px', maxWidth: '600px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          <h2 className="section-title" style={{ textAlign: 'left', margin: 0 }}>Why Khapli Aata is <span>Better?</span></h2>
+          <p style={{ fontSize: '1.15rem', lineHeight: '1.8', color: 'var(--text-secondary)', margin: 0 }}>
+            Khapli wheat, also known as ancient grain, is naturally richer in nutrients and easier to digest compared to regular wheat. With its low glycemic index and high fiber content, it supports better digestion and helps maintain balanced energy levels throughout the day.
+          </p>
+          <p style={{ fontSize: '1.15rem', lineHeight: '1.8', color: 'var(--text-secondary)', margin: 0, fontWeight: 'bold' }}>
+            Make a healthier switch for your daily rotis with Satvikana Khapli Aata.
+          </p>
+          <Link to="/products/flour" style={{ alignSelf: 'flex-start', marginTop: '10px' }}>
+            <button className="shop-btn" style={{ padding: '15px 35px', fontSize: '1.1rem', borderRadius: '30px', background: 'var(--accent-color)', color: 'white', border: 'none', cursor: 'pointer', fontWeight: 'bold', boxShadow: '0 8px 25px rgba(212, 136, 6, 0.3)', transition: 'all 0.3s' }}>
+              Switch to Gluten Free Flour
+            </button>
+          </Link>
         </div>
       </section>
 

@@ -5,29 +5,43 @@ const Recipe = () => {
   const [expandedId, setExpandedId] = useState(null);
 
   const recipes = [
-    {
-      id: 1,
-      title: 'Spicy Masala Roasted Makhana',
-      time: '15 mins',
-      difficulty: 'Easy',
-      desc: 'The classic, healthy anytime snack heavily coated with Indian spices.',
-      ingredients: [
-        '2 cups Satvikana Makhana',
-        '1 tbsp Ghee or Olive Oil',
-        '1/2 tsp Turmeric Powder',
-        '1/2 tsp Red Chilli Powder',
-        '1 tsp Chaat Masala',
-        'Salt to taste'
-      ],
-      instructions: [
-        'Heat ghee in a thick-bottomed pan over low heat.',
-        'Add the turmeric and red chilli powder. Quickly stir for 10 seconds to release the aroma.',
-        'Add the Makhana and roast on low heat for 10-12 minutes until crunchy.',
-        'Turn off the heat, sprinkle chaat masala and salt. Toss well.',
-        'Let it cool completely and store in an airtight container.'
-      ],
-      img: '/best_image.png'
-    },
+  {
+  id: 1,
+  title: 'Makhana Paneer Curry',
+  time: '35 mins',
+  difficulty: 'Medium',
+  desc: 'A rich, creamy, restaurant-style curry made with roasted makhana and soft paneer cubes. Perfect for special occasions and family dinners.',
+  ingredients: [
+    '2 cups Satvikana Makhana',
+    '200 gm Paneer (cubed)',
+    '2 tbsp Oil or Butter',
+    '1 Onion (finely chopped)',
+    '2 Tomatoes (pureed)',
+    '1 tsp Ginger-Garlic Paste',
+    '10-12 Cashews (paste)',
+    '1/2 tsp Turmeric Powder',
+    '1 tsp Red Chilli Powder',
+    '1 tsp Coriander Powder',
+    '1 tsp Garam Masala',
+    'Salt to taste',
+    '1 cup Milk or Water',
+    'Fresh Cream (optional)',
+    'Fresh Coriander for garnish'
+  ],
+  instructions: [
+    'Heat a little ghee in a pan and roast the makhana on low flame until crispy. Keep aside.',
+    'Optionally, lightly fry the paneer cubes until golden and set aside.',
+    'In the same pan, heat oil or butter and sauté the chopped onion until golden brown.',
+    'Add ginger-garlic paste and cook for 1 minute until fragrant.',
+    'Add tomato puree and cook for 5-7 minutes until the oil starts separating.',
+    'Mix in turmeric powder, red chilli powder, coriander powder, and salt. Cook for another minute.',
+    'Add the cashew paste and stir well to create a rich and creamy gravy.',
+    'Pour in milk or water and simmer for 3-4 minutes until the curry reaches the desired consistency.',
+    'Add the paneer cubes and roasted makhana, then cook on low flame for 5 minutes.',
+    'Finish with garam masala and fresh cream. Garnish with chopped coriander leaves and serve hot.'
+  ],
+  img: '/makhana_paneer_curry.webp'
+},
     {
       id: 2,
       title: 'Creamy Makhana Kheer',
@@ -50,14 +64,14 @@ const Recipe = () => {
         'Cook on low heat for another 20 minutes until the kheer thickens.',
         'Garnish with cardamom powder and serve warm or chilled!'
       ],
-      img: '/best_image.png'
+      img: '/makhana_kheer.avif'
     },
     {
       id: 3,
-      title: 'Makhana Bhel Pizza',
+      title: 'Makhana Bhel',
       time: '10 mins',
       difficulty: 'Quick',
-      desc: 'A modern, tangy fusion twist on pizza using crunchy makhana as a base salad.',
+      desc: 'A crunchy, tangy, and healthy Indian street food snack made with roasted makhana, fresh chopped veggies, and delicious chutneys.',
       ingredients: [
         '2 cups Roasted Satvikana Makhana',
         '1 finely chopped Onion',
@@ -73,7 +87,7 @@ const Recipe = () => {
         'Quickly garnish with crunchy sev and fresh coriander leaves.',
         'Serve immediately so the makhana retains its signature crunch!'
       ],
-      img: '/best_image.png'
+      img: '/makhana_bhel.jpg'
     }
   ];
 

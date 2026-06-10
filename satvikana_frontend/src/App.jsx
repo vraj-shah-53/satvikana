@@ -10,6 +10,8 @@ import Recipe from './pages/Recipe';
 import WhySatvikana from './pages/WhySatvikana';
 import Auth from './pages/Auth';
 import Cart from './pages/Cart';
+import OrderHistory from './pages/OrderHistory';
+import AdminOrders from './pages/AdminOrders';
 import { CartProvider } from './CartContext';
 import './App.css';
 
@@ -23,12 +25,15 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/products" element={<Products />} />
+              <Route path="/products/:category" element={<Products />} />
               <Route path="/product/:id" element={<ProductDetails />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/recipe" element={<Recipe />} />
               <Route path="/why-satvikana" element={<WhySatvikana />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/cart" element={<Cart />} />
+              <Route path="/order-history" element={<OrderHistory />} />
+              <Route path="/admin-orders" element={<AdminOrders />} />
             </Routes>
           </main>
           <Footer />
