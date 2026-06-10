@@ -88,7 +88,7 @@ products = [
     
     # Khapli Wheat Flour
     {
-        "name": "Satvikana Khapli Wheat flour (GMO FREE- LAB TESTED) | 2kg Pack",
+        "name": "Satvikana Khapli Wheat flour (GMO FREE- LAB TESTED) - 2kg | 2kg Pack",
         "price": 399.00,
         "original_price": 499.00,
         "category": "flour",
@@ -96,7 +96,7 @@ products = [
         "description": "Pure stoneground Khapli (Emmer) wheat flour, GMO free and lab tested. Rich in dietary fiber, vitamins, and minerals. Perfect for making soft, premium, and healthy chapatis and rotis."
     },
     {
-        "name": "Satvikana Khapli Wheat flour (GMO FREE- LAB TESTED) | 1kg Pack",
+        "name": "Satvikana Khapli Wheat flour (GMO FREE- LAB TESTED) - 1kg | 1kg Pack",
         "price": 199.00,
         "original_price": 249.00,
         "category": "flour",
