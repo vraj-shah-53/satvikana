@@ -5,7 +5,7 @@ const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/products/')
+    fetch('https://end.onrender.com/api/products/')
       .then(res => res.json())
       .then(data => setProducts(data))
       .catch(err => console.error(err));
@@ -32,7 +32,7 @@ const Home = () => {
             {products.length > 0 ? products.slice(0, 5).map(product => (
               <div key={product.id} className="slider-item" style={{ minWidth: '100%', position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '20px 20px 60px 20px' }}>
                 <div style={{ height: '300px', width: '100%', overflow: 'hidden', borderRadius: '15px', marginBottom: '20px', boxShadow: '0 5px 15px rgba(0,0,0,0.1)', position: 'relative', backgroundColor: '#FFFFFF' }}>
-                  <img src={product.image ? (product.image.startsWith('http') ? product.image : `http://127.0.0.1:8000${product.image}`) : "/best_image.png"} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                  <img src={product.image ? (product.image.startsWith('http') ? product.image : `https://satvikana-backend.onrender.com${product.image}`) : "/best_image.png"} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                 </div>
                 <h3 style={{ fontSize: '1.6rem', marginBottom: '15px', color: 'var(--text-primary)', textAlign: 'center', maxWidth: '90%' }}>{product.name.split('|')[0]}</h3>
                 <Link to={`/product/${product.id}`} style={{ zIndex: 10 }}>

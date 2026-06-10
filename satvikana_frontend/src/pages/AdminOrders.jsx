@@ -18,7 +18,7 @@ const AdminOrders = () => {
   const fetchAllOrders = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/orders/', {
+      const res = await fetch('https://satvikana-backend.onrender.com/api/orders/', {
         headers: {
           'Authorization': `Token ${token}`,
           'Content-Type': 'application/json'
@@ -56,7 +56,7 @@ const AdminOrders = () => {
     }
 
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/auth/login/', {
+      const res = await fetch('https://satvikana-backend.onrender.com/api/auth/login/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -85,7 +85,7 @@ const AdminOrders = () => {
 
   const handleStatusUpdate = async (orderId, newStatus) => {
     try {
-      const res = await fetch(`http://127.0.0.1:8000/api/orders/${orderId}/`, {
+      const res = await fetch(`https://satvikana-backend.onrender.com/api/orders/${orderId}/`, {
         method: 'PATCH',
         headers: {
           'Authorization': `Token ${token}`,

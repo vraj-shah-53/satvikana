@@ -20,7 +20,7 @@ const Auth = () => {
 
   useEffect(() => {
     if (token) {
-      fetch('http://127.0.0.1:8000/api/auth/profile/', {
+      fetch('https://satvikana-backend.onrender.com/api/auth/profile/', {
         headers: {
           'Authorization': `Token ${token}`
         }
@@ -89,7 +89,7 @@ const Auth = () => {
     setProfileSuccessMsg('');
     setProfileErrorMsg('');
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/auth/profile/', {
+      const res = await fetch('https://satvikana-backend.onrender.com/api/auth/profile/', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -129,8 +129,8 @@ const Auth = () => {
     setSuccessMSG('');
     
     const url = isLogin 
-      ? 'http://127.0.0.1:8000/api/auth/login/' 
-      : 'http://127.0.0.1:8000/api/auth/register/';
+      ? 'https://satvikana-backend.onrender.com/api/auth/login/' 
+      : 'https://satvikana-backend.onrender.com/api/auth/register/';
       
     try {
       const res = await fetch(url, {
