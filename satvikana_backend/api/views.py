@@ -118,3 +118,15 @@ class LogoutView(APIView):
         except Exception:
             pass
         return Response({'message': 'Logged out'})
+
+from rest_framework.decorators import api_view, permission_classes
+
+@api_view(['GET', 'POST'])
+@permission_classes([permissions.AllowAny])
+def seed_db(request):
+    from .seed_data import run_seed
+    try:
+        total = run_seed()
+        return Response({'message': f'Database populated successfully! Total products: {total}'})
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
