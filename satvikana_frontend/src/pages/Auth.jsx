@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
+import { API_BASE_URL } from '../config';
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -22,7 +23,7 @@ const Auth = () => {
 
   useEffect(() => {
     if (token) {
-      fetch('https://satvikana-backend.onrender.com/api/auth/profile/', {
+      fetch(`${API_BASE_URL}/api/auth/profile/`, {
         headers: {
           'Authorization': `Token ${token}`
         }
@@ -91,7 +92,7 @@ const Auth = () => {
     setProfileSuccessMsg('');
     setProfileErrorMsg('');
     try {
-      const res = await fetch('https://satvikana-backend.onrender.com/api/auth/profile/', {
+      const res = await fetch(`${API_BASE_URL}/api/auth/profile/`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -131,8 +132,8 @@ const Auth = () => {
     setSuccessMSG('');
     
     const url = isLogin 
-      ? 'https://satvikana-backend.onrender.com/api/auth/login/' 
-      : 'https://satvikana-backend.onrender.com/api/auth/register/';
+      ? `${API_BASE_URL}/api/auth/login/` 
+      : `${API_BASE_URL}/api/auth/register/`;
       
     try {
       const res = await fetch(url, {

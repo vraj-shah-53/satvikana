@@ -75,7 +75,6 @@ products = [
         "image": "products/product_tangy_tomato.webp",
         "description": "Experience the rich crunch of Tangy Tomato Flavoured Makhana. 100% natural, roasted to perfection, and coated with a mouth-watering sweet and tangy tomato spice. A perfect guilt-free snack for every occasion."
     },
-    
     # Raw Makhana
     {
         "name": "Raw Makhana 200g | 100% Natural Organic Fox Nuts | High Protein & Calcium",
@@ -104,6 +103,62 @@ products = [
         "description": "Pure stoneground Khapli (Emmer) wheat flour, GMO free and lab tested. Rich in dietary fiber, vitamins, and minerals. Perfect for making soft, premium, and healthy chapatis and rotis."
     }
 ]
+
+import shutil
+
+# Frontend public directory path relative to populate.py
+frontend_public_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'satvikana_frontend', 'public'))
+backend_media_products_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), 'media', 'products'))
+
+FLAVOR_MAP = {
+    'chaat': 'Chaat Masala',
+    'himalayan': 'Himalayan Salt',
+    'cream': 'Cream & Onion',
+    'cheesy': 'Cheesy Masti',
+    'mint': 'Mint Masala',
+    'pepper': 'Pepper Punch',
+    'peri': 'Peri Peri',
+    'tomato': 'Tangy Tomato'
+}
+
+# Scan for combo images
+if os.path.exists(frontend_public_dir):
+    print(f"Scanning '{frontend_public_dir}' for combo images...")
+    for filename in os.listdir(frontend_public_dir):
+        # We look for product_flav1_flav2.ext
+        name_part, ext = os.path.splitext(filename)
+        ext = ext.lower()
+        if ext in ['.jpg', '.jpeg', '.png', '.webp', '.avif']:
+            parts = name_part.split('_')
+            if len(parts) == 3 and parts[0] == 'product':
+                f1, f2 = parts[1], parts[2]
+                if f1 in FLAVOR_MAP and f2 in FLAVOR_MAP and f1 != f2:
+                    # Found a combo image!
+                    flavor1 = FLAVOR_MAP[f1]
+                    flavor2 = FLAVOR_MAP[f2]
+                    combo_name = f"Satvikana Roasted Makhana Combo ({flavor1} & {flavor2}) 70x2 gm"
+                    
+                    # Copy to backend media/products if not exists
+                    src_path = os.path.join(frontend_public_dir, filename)
+                    dest_path = os.path.join(backend_media_products_dir, filename)
+                    try:
+                        if not os.path.exists(backend_media_products_dir):
+                            os.makedirs(backend_media_products_dir, exist_ok=True)
+                        if not os.path.exists(dest_path):
+                            shutil.copy2(src_path, dest_path)
+                            print(f"Copied image {filename} to backend media.")
+                    except Exception as e:
+                        print(f"Error copying {filename}: {e}")
+                        
+                    # Add to products list
+                    products.append({
+                        "name": f"{combo_name} | Gluten Free | No Added Preservatives | Rich in Protein & Calcium | Healthy Superfood Snack Combo",
+                        "price": 369.00,
+                        "original_price": 399.00,
+                        "category": "combo",
+                        "image": f"products/{filename}",
+                        "description": f"Get the best of both worlds with our Satvikana Roasted Makhana Combo. Contains 2 packs of 70g each: one delicious {flavor1} & one delicious {flavor2}. 100% natural, roasted to perfection & coated with premium spices. The perfect guilt-free snack combo."
+                    })
 
 for p in products:
     Product.objects.create(

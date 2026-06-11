@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { CartContext } from '../CartContext';
+import { API_BASE_URL } from '../config';
 
 const Products = () => {
   const { category } = useParams();
@@ -8,7 +9,7 @@ const Products = () => {
   const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
-    fetch('https://satvikana-backend.onrender.com/api/products/')
+    fetch(`${API_BASE_URL}/api/products/`)
       .then(res => res.json())
       .then(data => setProducts(data))
       .catch(err => console.error(err));
@@ -26,6 +27,8 @@ const Products = () => {
         return <>Raw <span>Makhana</span></>;
       case 'flavoured':
         return <>Flavoured <span>Makhana</span></>;
+      case 'combo':
+        return <>Makhana <span>Combo</span></>;
       case 'flour':
         return <>Khapli <span>Wheat Flour</span></>;
       default:
@@ -55,7 +58,7 @@ const Products = () => {
   }}
 />
               </div>
-              <h3 style={{ fontSize: '1.2rem', marginBottom: '10px', transition: 'color 0.3s', minHeight: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <h3 style={{ fontFamily: 'Outfit, sans-serif', fontWeight: '600', fontSize: '1.2rem', marginBottom: '10px', transition: 'color 0.3s', minHeight: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 {product.name.split('|')[0]}
               </h3>
             </Link>

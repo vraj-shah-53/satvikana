@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { CartContext } from '../CartContext';
+import { API_BASE_URL } from '../config';
 
 const Cart = () => {
   const { cart, removeFromCart, updateCartQuantity, clearCart } = useContext(CartContext);
@@ -68,7 +69,7 @@ const Cart = () => {
         payment_method: orderDetails.paymentMethod
       };
 
-      const orderRes = await fetch('https://satvikana-backend.onrender.com/api/orders/', {
+      const orderRes = await fetch(`${API_BASE_URL}/api/orders/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -84,7 +85,7 @@ const Cart = () => {
 
       // 2. Concurrently update profile if needed
       try {
-        const profileRes = await fetch('https://satvikana-backend.onrender.com/api/auth/profile/', {
+        const profileRes = await fetch(`${API_BASE_URL}/api/auth/profile/`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -135,10 +136,10 @@ const Cart = () => {
               <div key={item.id} className="cart-item-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '15px 20px', marginBottom: '15px', borderRadius: '15px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
                   <div style={{ width: '60px', height: '60px', borderRadius: '12px', overflow: 'hidden' }}>
-                    <img src={item.image ? (item.image.startsWith('http') ? item.image : `https://satvikana-backend.onrender.com${item.image}`) : "/best_image.png"} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <img src={item.image ? `/${item.image.split('/').pop()}` : "/best_image.png"} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   </div>
                   <div style={{ textAlign: 'left' }}>
-                    <h4 style={{ margin: '0 0 5px', color: 'var(--text-primary)', fontSize: '1rem' }}>{item.name.split('|')[0]}</h4>
+                    <h4 style={{ fontFamily: 'Outfit, sans-serif', fontWeight: '600', margin: '0 0 5px', color: 'var(--text-primary)', fontSize: '1rem' }}>{item.name.split('|')[0]}</h4>
                     {!isCheckoutMode ? (
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '5px' }}>
                         <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginRight: '4px' }}>Qty:</span>

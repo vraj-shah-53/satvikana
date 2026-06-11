@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
+import { API_BASE_URL } from '../config';
 
 const AdminOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -20,7 +21,7 @@ const AdminOrders = () => {
   const fetchAllOrders = async () => {
     setLoading(true);
     try {
-      const res = await fetch('https://satvikana-backend.onrender.com/api/orders/', {
+      const res = await fetch(`${API_BASE_URL}/api/orders/`, {
         headers: {
           'Authorization': `Token ${token}`,
           'Content-Type': 'application/json'
@@ -58,7 +59,7 @@ const AdminOrders = () => {
     }
 
     try {
-      const res = await fetch('https://satvikana-backend.onrender.com/api/auth/login/', {
+      const res = await fetch(`${API_BASE_URL}/api/auth/login/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -87,7 +88,7 @@ const AdminOrders = () => {
 
   const handleStatusUpdate = async (orderId, newStatus) => {
     try {
-      const res = await fetch(`https://satvikana-backend.onrender.com/api/orders/${orderId}/`, {
+      const res = await fetch(`${API_BASE_URL}/api/orders/${orderId}/`, {
         method: 'PATCH',
         headers: {
           'Authorization': `Token ${token}`,

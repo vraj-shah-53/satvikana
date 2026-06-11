@@ -5,6 +5,7 @@ class Product(models.Model):
     CATEGORY_CHOICES = (
         ('raw', 'Raw Makhana'),
         ('flavoured', 'Flavoured Makhana'),
+        ('combo', 'Makhana Combo'),
         ('flour', 'Khapli Wheat Flour'),
     )
     name = models.CharField(max_length=200)

@@ -109,6 +109,7 @@ const Header = () => {
                     <div style={{ background: '#0a0a0a', display: 'flex', flexDirection: 'column' }}>
                       <Link to="/products/raw" className="nav-dropdown-link" onClick={() => { setIsMenuOpen(false); setIsProductsSubmenuOpen(false); }} style={{ paddingLeft: '40px', fontSize: '0.85rem', textTransform: 'uppercase', borderBottom: '1px solid #111' }}>Raw Makhana</Link>
                       <Link to="/products/flavoured" className="nav-dropdown-link" onClick={() => { setIsMenuOpen(false); setIsProductsSubmenuOpen(false); }} style={{ paddingLeft: '40px', fontSize: '0.85rem', textTransform: 'uppercase', borderBottom: '1px solid #111' }}>Flavoured Makhana</Link>
+                      <Link to="/products/combo" className="nav-dropdown-link" onClick={() => { setIsMenuOpen(false); setIsProductsSubmenuOpen(false); }} style={{ paddingLeft: '40px', fontSize: '0.85rem', textTransform: 'uppercase', borderBottom: '1px solid #111' }}>Makhana Combo</Link>
                       <Link to="/products/flour" className="nav-dropdown-link" onClick={() => { setIsMenuOpen(false); setIsProductsSubmenuOpen(false); }} style={{ paddingLeft: '40px', fontSize: '0.85rem', textTransform: 'uppercase', borderBottom: '1px solid #111' }}>Khapli Wheat Flour</Link>
                     </div>
                   )}

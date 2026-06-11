@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { CartContext } from '../CartContext';
+import { API_BASE_URL } from '../config';
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -8,7 +9,7 @@ const ProductDetails = () => {
   const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
-    fetch(`https://satvikana-backend.onrender.com/api/products/${id}/`)
+    fetch(`${API_BASE_URL}/api/products/${id}/`)
       .then(res => res.json())
       .then(data => setProduct(data))
       .catch(err => console.error(err));
@@ -36,7 +37,7 @@ const ProductDetails = () => {
 />
         </div>
         <div style={{ flex: '1', minWidth: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-          <h1 style={{ fontSize: '3rem', marginBottom: '15px', color: 'var(--primary-color)' }}>{product.name.split('|')[0]}</h1>
+          <h1 style={{ fontFamily: 'Outfit, sans-serif', fontWeight: '800', fontSize: '3rem', marginBottom: '15px', color: 'var(--primary-color)' }}>{product.name.split('|')[0]}</h1>
           <p style={{ fontSize: '1.2rem', color: 'var(--text-secondary)', marginBottom: '10px', textTransform: 'uppercase', letterSpacing: '1px' }}>{product.name.includes('|') ? product.name.substring(product.name.indexOf('|') + 1) : 'Premium Quality Healthy Food'}</p>
           <p style={{ margin: '20px 0', display: 'flex', alignItems: 'center', gap: '15px' }}>
             {product.original_price && (

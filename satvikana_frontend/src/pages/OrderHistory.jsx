@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { API_BASE_URL } from '../config';
 
 const OrderHistory = () => {
   const [orders, setOrders] = useState([]);
@@ -15,7 +16,7 @@ const OrderHistory = () => {
 
     const fetchOrders = async () => {
       try {
-        const res = await fetch('https://satvikana-backend.onrender.com/api/orders/', {
+        const res = await fetch(`${API_BASE_URL}/api/orders/`, {
           headers: {
             'Authorization': `Token ${token}`,
             'Content-Type': 'application/json'

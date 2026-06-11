@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { API_BASE_URL } from '../config';
+
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
-    fetch('https://satvikana-backend.onrender.com/api/products/')
+    fetch(`${API_BASE_URL}/api/products/`)
       .then(res => res.json())
       .then(data => setProducts(data))
       .catch(err => console.error(err));
@@ -46,7 +48,7 @@ const Home = () => {
   }}
 />
                 </div>
-                <h3 style={{ fontSize: '1.6rem', marginBottom: '15px', color: 'var(--text-primary)', textAlign: 'center', maxWidth: '90%' }}>{product.name.split('|')[0]}</h3>
+                <h3 style={{ fontFamily: 'Outfit, sans-serif', fontWeight: '600', fontSize: '1.6rem', marginBottom: '15px', color: 'var(--text-primary)', textAlign: 'center', maxWidth: '90%' }}>{product.name.split('|')[0]}</h3>
                 <Link to={`/product/${product.id}`} style={{ zIndex: 10 }}>
                   <button className="shop-btn" style={{ padding: '12px 30px', fontSize: '1rem', boxShadow: '0 8px 25px rgba(212, 136, 6, 0.3)' }}>Shop Now</button>
                 </Link>
