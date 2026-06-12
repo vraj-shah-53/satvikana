@@ -235,7 +235,7 @@ const Footer = () => {
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '20px', maxWidth: '1200px', margin: '0 auto', fontSize: '0.8rem', color: 'rgba(255, 255, 255, 0.4)' }}>
           
           <div>
-            &copy; 2026 Satvikana. All rights reserved. Powered by Shopify.
+            &copy; 2026 Satvikana. All rights reserved.
           </div>
 
           <div style={{ display: 'flex', gap: '20px' }}>
