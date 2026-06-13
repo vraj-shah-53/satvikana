@@ -1,25 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { API_BASE_URL } from '../config';
+import Makhana3DCarousel from '../components/Makhana3DCarousel';
 
 const Home = () => {
-  const [products, setProducts] = useState([]);
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  useEffect(() => {
-    fetch(`${API_BASE_URL}/api/products/`)
-      .then(res => res.json())
-      .then(data => setProducts(data))
-      .catch(err => console.error(err));
-  }, []);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % 5);
-    }, 3000);
-    return () => clearInterval(timer);
-  }, []);
-
   return (
     <div>
       {/* Hero Banner Section */}
@@ -27,49 +10,8 @@ const Home = () => {
         <img src="/home_banner.png" alt="Satvikana Banner" className="hero-banner-img" />
       </section>
 
-      <section className="slider-container">
-        <h2 className="section-title">Featured <span>Flavours</span></h2>
-        <div className="slider-viewport" style={{ overflow: 'hidden', width: '100%', maxWidth: '800px', margin: '0 auto', position: 'relative', borderRadius: '20px', backgroundColor: 'var(--surface-color)', boxShadow: 'var(--shadow-custom)'}}>
-          <div className="slider-track" style={{ display: 'flex', transition: 'transform 0.8s ease-in-out', transform: `translateX(-${currentSlide * 100}%)` }}>
-            {products.length > 0 ? products.slice(0, 5).map(product => (
-              <div key={product.id} className="slider-item" style={{ minWidth: '100%', position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '20px 20px 60px 20px' }}>
-                <div style={{ height: '300px', width: '100%', overflow: 'hidden', borderRadius: '15px', marginBottom: '20px', boxShadow: '0 5px 15px rgba(0,0,0,0.1)', position: 'relative', backgroundColor: '#FFFFFF' }}>
-                  <img
-  src={
-    product.image
-      ? `/${product.image.split('/').pop()}`
-      : "/best_image.png"
-  }
-  alt={product.name}
-  style={{
-    width: '100%',
-    height: '100%',
-    objectFit: 'contain'
-  }}
-/>
-                </div>
-                <h3 style={{ fontFamily: 'Outfit, sans-serif', fontWeight: '600', fontSize: '1.6rem', marginBottom: '15px', color: 'var(--text-primary)', textAlign: 'center', maxWidth: '90%' }}>{product.name.split('|')[0]}</h3>
-                <Link to={`/product/${product.id}`} style={{ zIndex: 10 }}>
-                  <button className="shop-btn" style={{ padding: '12px 30px', fontSize: '1rem', boxShadow: '0 8px 25px rgba(212, 136, 6, 0.3)' }}>Shop Now</button>
-                </Link>
-              </div>
-            )) : [1,2,3,4,5].map(i => (
-              <div key={i} className="slider-item" style={{ minWidth: '100%', position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '20px 20px 60px 20px' }}>
-                <div style={{ height: '300px', width: '100%', overflow: 'hidden', borderRadius: '15px', marginBottom: '20px', position: 'relative', backgroundColor: '#FFFFFF' }}>
-                  <img src="/best_image.png" alt={`Flavour ${i}`} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-                </div>
-                <h3 style={{ fontSize: '1.6rem', marginBottom: '15px', color: 'var(--text-primary)', textAlign: 'center', maxWidth: '90%' }}>Premium Makhana Flavour {i}</h3>
-                <button className="shop-btn" style={{ zIndex: 10, padding: '12px 30px', fontSize: '1rem', boxShadow: '0 8px 25px rgba(212, 136, 6, 0.3)' }}>Shop Now</button>
-              </div>
-            ))}
-          </div>
-          <div className="slider-dots" style={{ position: 'absolute', bottom: '20px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '12px' }}>
-             {[0, 1, 2, 3, 4].map(idx => (
-                <div key={idx} style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: currentSlide === idx ? 'var(--accent-color)' : '#CCC', transition: 'background-color 0.3s', cursor: 'pointer' }} onClick={() => setCurrentSlide(idx)}></div>
-             ))}
-          </div>
-        </div>
-      </section>
+      {/* 3D E-Commerce Carousel for Flavoured Makhana Products */}
+      <Makhana3DCarousel />
 
       {/* Photos Section */}
       <section className="photos-section">

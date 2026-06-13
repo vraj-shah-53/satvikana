@@ -133,69 +133,41 @@ const Cart = () => {
           {/* Left Column: Cart Items (Always visible but shrinks if checkout is open) */}
           <div style={{ flex: '1.5', minWidth: '350px' }}>
             {cart.map(item => (
-              <div key={item.id} className="cart-item-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '15px 20px', marginBottom: '15px', borderRadius: '15px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                  <div style={{ width: '60px', height: '60px', borderRadius: '12px', overflow: 'hidden' }}>
-                    <img src={item.image ? `/${item.image.split('/').pop()}` : "/best_image.png"} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <div key={item.id} className="cart-item-row">
+                <div className="cart-item-left">
+                  <div className="cart-item-img-wrapper">
+                    <img src={item.image ? `/${item.image.split('/').pop()}` : "/best_image.png"} alt={item.name} />
                   </div>
-                  <div style={{ textAlign: 'left' }}>
-                    <h4 style={{ fontFamily: 'Outfit, sans-serif', fontWeight: '600', margin: '0 0 5px', color: 'var(--text-primary)', fontSize: '1rem' }}>{item.name.split('|')[0]}</h4>
+                  <div className="cart-item-details">
+                    <h4 className="cart-item-title">{item.name.split('|')[0]}</h4>
                     {!isCheckoutMode ? (
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '5px' }}>
-                        <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginRight: '4px' }}>Qty:</span>
+                      <div className="cart-qty-selector">
+                        <span className="qty-label">Qty:</span>
                         <button 
                           onClick={() => updateCartQuantity(item.id, item.quantity - 1)}
-                          style={{
-                            background: 'rgba(0,0,0,0.05)',
-                            color: 'var(--text-primary)',
-                            border: 'none',
-                            width: '28px',
-                            height: '28px',
-                            borderRadius: '6px',
-                            cursor: 'pointer',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            fontSize: '1.2rem',
-                            fontWeight: 'bold',
-                            transition: 'var(--transition)'
-                          }}
+                          className="qty-btn"
                         >
                           -
                         </button>
-                        <span style={{ minWidth: '20px', textAlign: 'center', fontWeight: 'bold', color: 'var(--text-primary)', fontSize: '1rem' }}>
+                        <span className="qty-val">
                           {item.quantity}
                         </span>
                         <button 
                           onClick={() => updateCartQuantity(item.id, item.quantity + 1)}
-                          style={{
-                            background: 'rgba(0,0,0,0.05)',
-                            color: 'var(--text-primary)',
-                            border: 'none',
-                            width: '28px',
-                            height: '28px',
-                            borderRadius: '6px',
-                            cursor: 'pointer',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            fontSize: '1.2rem',
-                            fontWeight: 'bold',
-                            transition: 'var(--transition)'
-                          }}
+                          className="qty-btn"
                         >
                           +
                         </button>
                       </div>
                     ) : (
-                      <p style={{ margin: '0', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Qty: {item.quantity}</p>
+                      <p className="qty-display">Qty: {item.quantity}</p>
                     )}
                   </div>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                  <p style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--accent-color)' }}>₹{(item.price * item.quantity).toFixed(2)}</p>
+                <div className="cart-item-right">
+                  <p className="cart-item-price">₹{(item.price * item.quantity).toFixed(2)}</p>
                   {!isCheckoutMode && (
-                    <button onClick={() => removeFromCart(item.id)} style={{ background: '#ff4d4d', color: 'white', border: 'none', padding: '8px 12px', borderRadius: '5px', cursor: 'pointer', transition: 'var(--transition)' }}>Remove</button>
+                    <button onClick={() => removeFromCart(item.id)} className="cart-remove-btn">Remove</button>
                   )}
                 </div>
               </div>
