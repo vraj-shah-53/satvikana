@@ -148,16 +148,35 @@ a {
   transform: scale(1.05);
 }
 
+/* Navigation Dropdown Menu (Deep Jungle Green Theme) */
+.nav-menu-dropdown {
+  position: absolute;
+  top: calc(100% + 15px);
+  left: 0;
+  background: var(--primary-color); /* Deep Jungle Green (#2F5233) */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 3px solid var(--accent-color); /* Gold accent top border */
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  min-width: 240px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+  overflow: hidden;
+}
+
 .nav-dropdown-link {
-  color: #FFFFFF;
-  padding: 15px 25px;
+  color: #FFFFFF; /* Clean White text */
+  padding: 14px 24px;
   text-decoration: none;
   font-weight: 500;
-  transition: all 0.2s;
+  transition: var(--transition);
   text-transform: uppercase;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   letter-spacing: 1px;
-  border-bottom: 1px solid #1A1A1A;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: block;
 }
 
 .nav-dropdown-link:last-child {
@@ -165,9 +184,61 @@ a {
 }
 
 .nav-dropdown-link:hover {
-  background: #111111;
+  background: rgba(255, 255, 255, 0.08); /* White overlay highlight */
+  color: var(--accent-color); /* Gold text on hover */
+  padding-left: 28px;
+}
+
+.nav-dropdown-btn {
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.submenu-arrow {
+  font-size: 0.8rem;
+  transition: transform 0.3s;
+}
+
+.nav-submenu-container {
+  background: rgba(0, 0, 0, 0.15); /* Slightly darker overlay for submenu hierarchy */
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.nav-submenu-container .nav-dropdown-link {
+  padding-left: 40px;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.85);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.nav-submenu-container .nav-dropdown-link:last-child {
+  border-bottom: none;
+}
+
+.nav-submenu-container .nav-dropdown-link:hover {
+  background: rgba(255, 255, 255, 0.05);
   color: var(--accent-color);
-  padding-left: 30px; /* Slight indent hover effect */
+  padding-left: 44px;
+}
+
+.nav-logout-link {
+  color: #FF8F8F !important; /* Soft red for warning visibility */
+  cursor: pointer;
+}
+
+.nav-logout-link:hover {
+  background: rgba(255, 143, 143, 0.08) !important;
+  color: #FF6B6B !important;
 }
 
 /* Hero Banner Section */

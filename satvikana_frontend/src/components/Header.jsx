@@ -64,53 +64,24 @@ const Header = () => {
  
             {/* Dropdown Menu specifically anchored here */}
             {isMenuOpen && (
-              <div 
-                className="nav-menu-dropdown" 
-                style={{ 
-                  position: 'absolute', 
-                  top: 'calc(100% + 15px)', 
-                  left: '0', 
-                  background: '#000', 
-                  border: '1px solid #333',
-                  borderRadius: '10px',
-                  boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
-                  minWidth: '220px',
-                  zIndex: 1000,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  padding: '10px 0',
-                }}
-              >
+              <div className="nav-menu-dropdown">
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                   <button 
-                    className="nav-dropdown-link" 
+                    className="nav-dropdown-link nav-dropdown-btn" 
                     onClick={(e) => {
                       e.preventDefault();
                       setIsProductsSubmenuOpen(!isProductsSubmenuOpen);
                     }}
-                    style={{ 
-                      background: 'none', 
-                      border: 'none', 
-                      borderBottom: '1px solid #1A1A1A', 
-                      color: '#FFFFFF', 
-                      textAlign: 'left', 
-                      cursor: 'pointer',
-                      width: '100%',
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      fontFamily: 'inherit'
-                    }}
                   >
                     <span>Products</span>
-                    <span style={{ fontSize: '0.8rem', transition: 'transform 0.3s', transform: isProductsSubmenuOpen ? 'rotate(90deg)' : 'rotate(0deg)' }}>&rarr;</span>
+                    <span className="submenu-arrow" style={{ transform: isProductsSubmenuOpen ? 'rotate(90deg)' : 'rotate(0deg)' }}>&rarr;</span>
                   </button>
                   {isProductsSubmenuOpen && (
-                    <div style={{ background: '#0a0a0a', display: 'flex', flexDirection: 'column' }}>
-                      <Link to="/products/raw" className="nav-dropdown-link" onClick={() => { setIsMenuOpen(false); setIsProductsSubmenuOpen(false); }} style={{ paddingLeft: '40px', fontSize: '0.85rem', textTransform: 'uppercase', borderBottom: '1px solid #111' }}>Raw Makhana</Link>
-                      <Link to="/products/flavoured" className="nav-dropdown-link" onClick={() => { setIsMenuOpen(false); setIsProductsSubmenuOpen(false); }} style={{ paddingLeft: '40px', fontSize: '0.85rem', textTransform: 'uppercase', borderBottom: '1px solid #111' }}>Flavoured Makhana</Link>
-                      <Link to="/products/combo" className="nav-dropdown-link" onClick={() => { setIsMenuOpen(false); setIsProductsSubmenuOpen(false); }} style={{ paddingLeft: '40px', fontSize: '0.85rem', textTransform: 'uppercase', borderBottom: '1px solid #111' }}>Makhana Combo</Link>
-                      <Link to="/products/flour" className="nav-dropdown-link" onClick={() => { setIsMenuOpen(false); setIsProductsSubmenuOpen(false); }} style={{ paddingLeft: '40px', fontSize: '0.85rem', textTransform: 'uppercase', borderBottom: '1px solid #111' }}>Khapli Wheat Flour</Link>
+                    <div className="nav-submenu-container">
+                      <Link to="/products/raw" className="nav-dropdown-link" onClick={() => { setIsMenuOpen(false); setIsProductsSubmenuOpen(false); }}>Raw Makhana</Link>
+                      <Link to="/products/flavoured" className="nav-dropdown-link" onClick={() => { setIsMenuOpen(false); setIsProductsSubmenuOpen(false); }}>Flavoured Makhana</Link>
+                      <Link to="/products/combo" className="nav-dropdown-link" onClick={() => { setIsMenuOpen(false); setIsProductsSubmenuOpen(false); }}>Makhana Combo</Link>
+                      <Link to="/products/flour" className="nav-dropdown-link" onClick={() => { setIsMenuOpen(false); setIsProductsSubmenuOpen(false); }}>Khapli Wheat Flour</Link>
                     </div>
                   )}
                 </div>
@@ -125,14 +96,13 @@ const Header = () => {
                       <Link to="/admin-orders" className="nav-dropdown-link" onClick={() => setIsMenuOpen(false)} style={{ color: 'var(--accent-color)', fontWeight: 'bold' }}>Admin Dashboard</Link>
                     )}
                     <span 
-                      className="nav-dropdown-link" 
+                      className="nav-dropdown-link nav-logout-link" 
                       onClick={() => {
                         setIsMenuOpen(false);
                         localStorage.removeItem('satvikana_token');
                         localStorage.removeItem('satvikana_user');
                         window.location.href = '/';
                       }} 
-                      style={{ cursor: 'pointer', color: '#ff4d4d' }}
                     >
                       Logout
                     </span>
