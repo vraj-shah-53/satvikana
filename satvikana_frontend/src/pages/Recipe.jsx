@@ -92,9 +92,9 @@ const Recipe = () => {
   ];
 
   return (
-    <div className="page-container" style={{ background: 'var(--bg-color)' }}>
+    <div className="page-container">
       <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-        <h1 style={{ fontSize: '3rem', color: 'var(--primary-color)' }}>Cook with <span>Satvikana</span></h1>
+        <h1 className="recipe-title">Cook with <span>Satvikana</span></h1>
         <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', maxWidth: '600px', margin: '15px auto 0' }}>
           Discover beautiful, healthy, and incredibly easy ways to integrate our premium Fox Nuts into your daily meals and desserts.
         </p>
@@ -109,15 +109,15 @@ const Recipe = () => {
             boxShadow: 'var(--shadow-custom)',
             border: '1px solid var(--border-color)'
           }}>
-            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+            <div className="recipe-card-inner">
               
               {/* Recipe Image Slot */}
-              <div style={{ flex: '1', minWidth: '300px', height: '250px' }}>
+              <div className="recipe-img-sec">
                 <img src={recipe.img} alt={recipe.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </div>
 
               {/* Recipe Intro Strip */}
-              <div style={{ flex: '1.5', minWidth: '300px', padding: '30px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <div className="recipe-info-sec">
                 <h2 style={{ color: 'var(--text-primary)', marginBottom: '10px' }}>{recipe.title}</h2>
                 <div style={{ display: 'flex', gap: '20px', marginBottom: '15px' }}>
                   <span style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '0.9rem', color: 'var(--text-secondary)' }}><Clock size={16} /> {recipe.time}</span>
@@ -149,9 +149,9 @@ const Recipe = () => {
               overflow: 'hidden',
               background: '#FAFAFA'
             }}>
-              <div style={{ padding: '30px', display: 'flex', flexWrap: 'wrap', gap: '40px', borderTop: '1px solid var(--border-color)' }}>
+              <div className="recipe-expansion-container">
                 {/* Ingredients List */}
-                <div style={{ flex: '1', minWidth: '250px' }}>
+                <div className="recipe-ingredients-sec">
                   <h3 style={{ fontSize: '1.5rem', marginBottom: '20px', color: 'var(--primary-color)', display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <Info size={24} /> Ingredients
                   </h3>
@@ -161,7 +161,7 @@ const Recipe = () => {
                 </div>
                 
                 {/* Instructions List */}
-                <div style={{ flex: '2', minWidth: '300px' }}>
+                <div className="recipe-instructions-sec">
                   <h3 style={{ fontSize: '1.5rem', marginBottom: '20px', color: 'var(--primary-color)' }}>Step-by-step Instructions</h3>
                   <ol style={{ paddingLeft: '20px', color: 'var(--text-primary)', lineHeight: '2' }}>
                     {recipe.instructions.map((step, idx) => (

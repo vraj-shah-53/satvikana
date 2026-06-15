@@ -32,11 +32,11 @@ const Home = () => {
       </section>
 
       {/* Factory and Health Benefits Section */}
-      <section className="factory-section" style={{ padding: '80px 20px', background: 'var(--surface-color)', display: 'flex', flexWrap: 'wrap', gap: '40px', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ flex: '1.2', minWidth: '300px', maxWidth: '650px', borderRadius: '20px', overflow: 'hidden', boxShadow: 'var(--shadow-custom)', aspectRatio: '4/3' }}>
+      <section className="factory-section home-section" style={{ background: 'var(--surface-color)' }}>
+        <div className="home-section-img-wrapper" style={{ aspectRatio: '4/3' }}>
           <img src="/factory.jpeg" alt="Satvikana Factory" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         </div>
-        <div style={{ flex: '1', minWidth: '300px', maxWidth: '600px' }}>
+        <div className="home-section-content">
           <h2 className="section-title" style={{ textAlign: 'left', marginBottom: '20px' }}>The <span>Makhana</span> Journey</h2>
           <p style={{ fontSize: '1.2rem', lineHeight: '1.8', color: 'var(--text-secondary)' }}>
             From the pristine ponds to our modern, hygienic processing facility, every Satvikana Makhana goes through rigorous quality checks. We ensure zero nutrient loss during the roasting process.
@@ -48,11 +48,11 @@ const Home = () => {
       </section>
 
       {/* Khapli Wheat Info Section */}
-      <section className="khapli-section" style={{ padding: '80px 20px', display: 'flex', flexWrap: 'wrap', gap: '50px', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ flex: '1.2', minWidth: '300px', maxWidth: '650px', borderRadius: '20px', overflow: 'hidden', boxShadow: 'var(--shadow-custom)' }}>
+      <section className="khapli-section home-section">
+        <div className="home-section-img-wrapper">
           <img src="/khapli_story.jpg" alt="The Story of Khapli Wheat" style={{ width: '100%', height: 'auto', display: 'block' }} />
         </div>
-        <div style={{ flex: '1', minWidth: '300px', maxWidth: '600px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <div className="home-section-content" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           <h2 className="section-title" style={{ textAlign: 'left', margin: 0 }}>Why Khapli Aata is <span>Better?</span></h2>
           <p style={{ fontSize: '1.15rem', lineHeight: '1.8', color: 'var(--text-secondary)', margin: 0 }}>
             Khapli wheat, also known as ancient grain, is naturally richer in nutrients and easier to digest compared to regular wheat. With its low glycemic index and high fiber content, it supports better digestion and helps maintain balanced energy levels throughout the day.

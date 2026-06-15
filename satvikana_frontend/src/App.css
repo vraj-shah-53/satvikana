@@ -786,3 +786,418 @@ a {
     padding: 15px;
   }
 }
+
+/* ==========================================
+   Mobile Responsiveness Cleanup & Utilities
+   ========================================== */
+
+/* WhatsApp Button Scale Down on Mobile */
+@media (max-width: 600px) {
+  .whatsapp-btn {
+    width: 50px !important;
+    height: 50px !important;
+    bottom: 20px !important;
+    left: 20px !important;
+  }
+  .whatsapp-btn svg {
+    width: 28px !important;
+    height: 28px !important;
+  }
+}
+
+/* Product Details Page Styles */
+.product-details-card {
+  display: flex;
+  gap: 50px;
+  flex-wrap: wrap;
+  background: var(--surface-color);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: var(--shadow-custom);
+  border: 1px solid var(--border-color);
+}
+.product-details-image-section {
+  flex: 1;
+  min-width: 300px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  border: 1px solid var(--border-color);
+}
+.product-details-info-section {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.product-details-title {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 3rem;
+  line-height: 1.2;
+  margin-bottom: 15px;
+  color: var(--primary-color);
+}
+.product-details-subtitle {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  word-break: break-word;
+}
+.product-details-price-container {
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.product-details-original-price {
+  text-decoration: line-through;
+  color: var(--text-secondary);
+  font-size: 1.6rem;
+  font-weight: normal;
+}
+.product-details-price {
+  color: var(--accent-color);
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+.product-details-description {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 40px;
+  color: var(--text-secondary);
+}
+.product-details-btn {
+  padding: 15px 40px;
+  font-size: 1.2rem;
+  align-self: flex-start;
+}
+
+@media (max-width: 768px) {
+  .product-details-card {
+    gap: 25px;
+    padding: 20px;
+  }
+  .product-details-title {
+    font-size: 2rem;
+  }
+  .product-details-subtitle {
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+  }
+  .product-details-price-container {
+    gap: 10px;
+  }
+  .product-details-original-price {
+    font-size: 1.2rem;
+  }
+  .product-details-price {
+    font-size: 1.8rem;
+  }
+  .product-details-description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+  }
+  .product-details-image-section,
+  .product-details-info-section {
+    min-width: 100%;
+  }
+  .product-details-image-section {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 600px) {
+  .product-details-btn {
+    width: 100%;
+    align-self: stretch;
+    text-align: center;
+  }
+}
+
+/* Products Page Grid Styles */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+@media (max-width: 600px) {
+  .products-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+}
+
+/* Cart Page Styles */
+.cart-layout-container {
+  margin-top: 40px;
+  max-width: 900px;
+  margin: 40px auto 0;
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+.cart-left-col {
+  flex: 1.5;
+  min-width: 350px;
+}
+.cart-right-col {
+  flex: 1;
+  min-width: 350px;
+}
+@media (max-width: 768px) {
+  .cart-left-col,
+  .cart-right-col {
+    min-width: 100%;
+  }
+}
+@media (max-width: 480px) {
+  .cart-right-col {
+    padding: 20px !important;
+  }
+}
+
+/* Contact Page Styles */
+.contact-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+  background: var(--surface-color);
+  border-radius: 25px;
+  box-shadow: var(--shadow-custom);
+  overflow: hidden;
+}
+.contact-info-panel {
+  flex: 1;
+  min-width: 350px;
+  background: var(--primary-color);
+  color: white;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+}
+.contact-form-panel {
+  flex: 1.2;
+  min-width: 350px;
+  padding: 50px;
+}
+@media (max-width: 768px) {
+  .contact-info-panel,
+  .contact-form-panel {
+    min-width: 100%;
+    padding: 30px 20px;
+  }
+  .contact-container {
+    gap: 0;
+  }
+}
+
+/* Recipe Page Styles */
+.recipe-card-inner {
+  display: flex;
+  flex-wrap: wrap;
+}
+.recipe-img-sec {
+  flex: 1;
+  min-width: 300px;
+  height: 250px;
+}
+.recipe-info-sec {
+  flex: 1.5;
+  min-width: 300px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+@media (max-width: 768px) {
+  .recipe-img-sec,
+  .recipe-info-sec {
+    min-width: 100%;
+  }
+  .recipe-info-sec {
+    padding: 20px;
+  }
+}
+
+/* Why Satvikana Page Styles */
+.why-hero-header {
+  background: var(--primary-color);
+  color: white;
+  padding: 80px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.why-hero-title {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+  color: #FFF;
+}
+.why-flex-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+  align-items: center;
+  margin-bottom: 100px;
+}
+.why-image-card {
+  flex: 1;
+  min-width: 300px;
+  height: 400px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-custom);
+}
+.why-promise-card {
+  display: flex;
+  flex-wrap: wrap-reverse;
+  gap: 50px;
+  align-items: center;
+  margin-bottom: 80px;
+  background: var(--surface-color);
+  padding: 50px;
+  border-radius: 30px;
+  box-shadow: var(--shadow-custom);
+}
+@media (max-width: 768px) {
+  .why-hero-header {
+    padding: 40px 15px;
+  }
+  .why-hero-title {
+    font-size: 2.2rem;
+  }
+  .why-flex-section {
+    gap: 30px;
+    margin-bottom: 60px;
+  }
+  .why-image-card {
+    height: 250px;
+    min-width: 100%;
+  }
+  .why-promise-card {
+    padding: 25px 20px;
+    gap: 30px;
+    border-radius: 20px;
+    margin-bottom: 50px;
+  }
+  .why-promise-card .why-image-card {
+    min-width: 100%;
+  }
+}
+
+/* Home Page Sections */
+.home-section {
+  padding: 80px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
+}
+.home-section-img-wrapper {
+  flex: 1.2;
+  min-width: 300px;
+  max-width: 650px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-custom);
+}
+.home-section-content {
+  flex: 1;
+  min-width: 300px;
+  max-width: 600px;
+}
+@media (max-width: 768px) {
+  .home-section {
+    padding: 40px 15px;
+    gap: 25px;
+  }
+  .home-section-img-wrapper {
+    min-width: 100%;
+    aspect-ratio: auto;
+    height: 250px;
+  }
+  .home-section-content {
+    min-width: 100%;
+  }
+  .home-section-content .section-title {
+    text-align: center !important;
+  }
+}
+
+.contact-title {
+  font-size: 3.5rem;
+  color: var(--primary-color);
+  margin-bottom: 15px;
+}
+@media (max-width: 768px) {
+  .contact-title {
+    font-size: 2.2rem;
+  }
+}
+
+.recipe-title {
+  font-size: 3rem;
+  color: var(--primary-color);
+}
+.recipe-expansion-container {
+  padding: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  border-top: 1px solid var(--border-color);
+}
+.recipe-ingredients-sec {
+  flex: 1;
+  min-width: 250px;
+}
+.recipe-instructions-sec {
+  flex: 2;
+  min-width: 300px;
+}
+@media (max-width: 768px) {
+  .recipe-title {
+    font-size: 2.2rem;
+  }
+  .recipe-expansion-container {
+    padding: 20px 15px;
+    gap: 25px;
+  }
+  .recipe-ingredients-sec,
+  .recipe-instructions-sec {
+    min-width: 100%;
+  }
+}
+
+.why-content-card {
+  flex: 1;
+  min-width: 300px;
+}
+.why-section-title {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+@media (max-width: 768px) {
+  .why-content-card {
+    min-width: 100%;
+  }
+  .why-section-title {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+}

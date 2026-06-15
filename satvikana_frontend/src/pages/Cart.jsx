@@ -118,7 +118,7 @@ const Cart = () => {
   };
 
   return (
-    <div className="page-container" style={{ padding: '40px 20px', background: 'var(--bg-color)' }}>
+    <div className="page-container">
       <h1 className="section-title">Your <span>Cart</span></h1>
       
       {cart.length === 0 ? (
@@ -128,10 +128,10 @@ const Cart = () => {
           <button className="shop-btn" style={{ marginTop: '20px' }} onClick={() => window.location.href='/products'}>Continue Shopping</button>
         </div>
       ) : (
-        <div style={{ marginTop: '40px', maxWidth: '900px', margin: '40px auto 0', display: 'flex', gap: '30px', flexWrap: 'wrap' }}>
+        <div className="cart-layout-container">
           
           {/* Left Column: Cart Items (Always visible but shrinks if checkout is open) */}
-          <div style={{ flex: '1.5', minWidth: '350px' }}>
+          <div className="cart-left-col">
             {cart.map(item => (
               <div key={item.id} className="cart-item-row">
                 <div className="cart-item-left">
@@ -186,7 +186,7 @@ const Cart = () => {
 
           {/* Right Column: Checkout Form (Expands only when button clicked) */}
           {isCheckoutMode && (
-            <div style={{ flex: '1', minWidth: '350px', background: 'var(--surface-color)', padding: '35px', borderRadius: '20px', boxShadow: 'var(--shadow-custom)', border: '2px solid var(--border-color)' }}>
+            <div className="cart-right-col" style={{ background: 'var(--surface-color)', padding: '35px', borderRadius: '20px', boxShadow: 'var(--shadow-custom)', border: '2px solid var(--border-color)' }}>
               <h2 style={{ marginBottom: '25px', color: 'var(--primary-color)', fontSize: '1.6rem', borderBottom: '2px solid var(--border-color)', paddingBottom: '10px' }}>Checkout Details</h2>
               <h3 style={{ textAlign: 'left', marginBottom: '20px', color: 'var(--text-primary)' }}>Order Total: <span style={{ color: 'var(--accent-color)' }}>₹{totalPrice.toFixed(2)}</span></h3>
               

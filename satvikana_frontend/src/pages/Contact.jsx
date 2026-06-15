@@ -20,19 +20,19 @@ const Contact = () => {
   };
 
   return (
-    <div className="page-container" style={{ background: 'var(--bg-color)', minHeight: '80vh', padding: '60px 20px' }}>
+    <div className="page-container">
       <div style={{ textAlign: 'center', marginBottom: '50px' }}>
-        <h1 style={{ fontSize: '3.5rem', color: 'var(--primary-color)', marginBottom: '15px' }}>Contact <span>Us</span></h1>
+        <h1 className="contact-title">Contact <span>Us</span></h1>
         <h3 style={{ fontSize: '1.3rem', color: 'var(--accent-color)', fontWeight: '600' }}>We'd Love to Hear From You</h3>
         <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', maxWidth: '600px', margin: '15px auto 0' }}>
           For product inquiries, support, or any questions, feel free to get in touch with us. 
         </p>
       </div>
 
-      <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', gap: '50px', background: 'var(--surface-color)', borderRadius: '25px', boxShadow: 'var(--shadow-custom)', overflow: 'hidden' }}>
+      <div className="contact-container">
         
         {/* Left Information Panel */}
-        <div style={{ flex: '1', minWidth: '350px', background: 'var(--primary-color)', color: 'white', padding: '50px', display: 'flex', flexDirection: 'column', gap: '35px' }}>
+        <div className="contact-info-panel">
           
           <div>
             <h3 style={{ color: 'var(--accent-color)', fontSize: '1.4rem', marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -68,7 +68,7 @@ const Contact = () => {
         </div>
 
         {/* Right Form Panel */}
-        <div style={{ flex: '1.2', minWidth: '350px', padding: '50px' }}>
+        <div className="contact-form-panel">
           <h2 style={{ fontSize: '2rem', color: 'var(--text-primary)', marginBottom: '30px' }}>Send us a Message</h2>
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
             

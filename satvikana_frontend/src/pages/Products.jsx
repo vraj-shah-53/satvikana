@@ -37,9 +37,9 @@ const Products = () => {
   };
 
   return (
-    <div className="page-container" style={{ padding: '50px' }}>
+    <div className="page-container">
       <h1 className="section-title">{getPageTitle()}</h1>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '30px', marginTop: '40px' }}>
+      <div className="products-grid">
         {filteredProducts.map(product => (
           <div key={product.id} className="testimonial-card" style={{ width: '100%', textAlign: 'center', position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <Link to={`/product/${product.id}`} style={{ display: 'block', color: 'inherit', textDecoration: 'none', flex: 1 }}>
