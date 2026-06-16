@@ -2,16 +2,33 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { CartContext } from '../CartContext';
 import { API_BASE_URL } from '../config';
+import { getInitialProducts, syncProducts } from '../productHelper';
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const [product, setProduct] = useState(null);
+  const [product, setProduct] = useState(() => {
+    const initial = getInitialProducts();
+    return initial.find(p => String(p.id) === String(id)) || null;
+  });
   const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
+    // Sync cached products list in case anything changed
+    syncProducts((data) => {
+      const updated = data.find(p => String(p.id) === String(id));
+      if (updated) {
+        setProduct(updated);
+      }
+    });
+
+    // Also fetch the individual endpoint to refresh extra details
     fetch(`${API_BASE_URL}/api/products/${id}/`)
       .then(res => res.json())
-      .then(data => setProduct(data))
+      .then(data => {
+        if (data && data.id) {
+          setProduct(data);
+        }
+      })
       .catch(err => console.error(err));
   }, [id]);
 

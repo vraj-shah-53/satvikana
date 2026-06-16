@@ -10,11 +10,19 @@ import {
 } from 'lucide-react';
 import { CartContext } from '../CartContext';
 import { API_BASE_URL } from '../config';
+import { getInitialProducts, syncProducts } from '../productHelper';
 import './Makhana3DCarousel.css';
 
 const Makhana3DCarousel = () => {
-  const [products, setProducts] = useState([]);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [products, setProducts] = useState(() => {
+    const initial = getInitialProducts();
+    return initial.filter(p => p.category === 'flavoured');
+  });
+  const [activeIndex, setActiveIndex] = useState(() => {
+    const flavoured = getInitialProducts().filter(p => p.category === 'flavoured');
+    const periIdx = flavoured.findIndex(p => p.name.toLowerCase().includes('peri peri'));
+    return periIdx !== -1 ? periIdx : Math.max(0, Math.floor(flavoured.length / 2));
+  });
   const [wishlist, setWishlist] = useState({});
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const { addToCart } = useContext(CartContext);
@@ -34,24 +42,17 @@ const Makhana3DCarousel = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`${API_BASE_URL}/api/products/`)
-      .then(res => res.json())
-      .then(data => {
-        const flavoured = data.filter(p => p.category === 'flavoured');
-        setProducts(flavoured);
-        
-        if (flavoured.length > 0) {
-          const periIdx = flavoured.findIndex(p => p.name.toLowerCase().includes('peri peri'));
-          if (periIdx !== -1) {
-            setActiveIndex(periIdx);
-          } else {
-            setActiveIndex(Math.floor(flavoured.length / 2));
-          }
-        }
-      })
-      .catch(err => {
-        console.error("Failed to fetch products:", err);
+    syncProducts((data) => {
+      const flavoured = data.filter(p => p.category === 'flavoured');
+      setProducts(flavoured);
+      
+      // Adjust active index if it's currently out of bounds
+      setActiveIndex(prev => {
+        if (prev < flavoured.length) return prev;
+        const periIdx = flavoured.findIndex(p => p.name.toLowerCase().includes('peri peri'));
+        return periIdx !== -1 ? periIdx : Math.max(0, Math.floor(flavoured.length / 2));
       });
+    });
   }, []);
 
   // Autoplay functionality
@@ -280,7 +281,7 @@ const Makhana3DCarousel = () => {
     return (
       <section className="carousel-3d-section">
         <h2 className="section-title">Featured <span>Flavours</span></h2>
-        <div style={{ color: 'white', padding: '40px 0' }}>Loading premium flavours...</div>
+        <div style={{ color: 'var(--text-secondary)', padding: '40px 0' }}>Loading premium flavours...</div>
       </section>
     );
   }

@@ -2,17 +2,17 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { CartContext } from '../CartContext';
 import { API_BASE_URL } from '../config';
+import { getInitialProducts, syncProducts } from '../productHelper';
 
 const Products = () => {
   const { category } = useParams();
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(getInitialProducts);
   const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
-    fetch(`${API_BASE_URL}/api/products/`)
-      .then(res => res.json())
-      .then(data => setProducts(data))
-      .catch(err => console.error(err));
+    syncProducts((data) => {
+      setProducts(data);
+    });
   }, []);
 
   // Filter products by category if route parameter is present
