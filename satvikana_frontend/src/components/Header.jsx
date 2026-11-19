@@ -48,20 +48,20 @@ const Header = () => {
         Welcome to Satvikana - Discover the Pure & Natural Goodness of Premium Makhana
       </div>
       
-      <div className="header-main" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div className="header-main">
         
         {/* Left - Hamburger and Dropdown */}
-        <div className="header-left" style={{ flex: 1, display: 'flex', justifyContent: 'flex-start', position: 'relative' }}>
+        <div className="header-left">
           <div ref={menuRef} style={{ position: 'relative' }}>
-            <button className="icon-btn" onClick={toggleMenu} style={{ padding: '10px 0' }}>
-              {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            <button className="icon-btn header-menu-btn" onClick={toggleMenu} aria-label="Toggle menu">
+              {isMenuOpen ? <X size={26} /> : <Menu size={26} />}
             </button>
- 
+
             {/* Invisible bridge to prevent hover loss */}
             {isMenuOpen && (
               <div style={{ position: 'absolute', top: '100%', left: '0', width: '100%', height: '15px', zIndex: 999 }}></div>
             )}
- 
+
             {/* Dropdown Menu specifically anchored here */}
             {isMenuOpen && (
               <div className="nav-menu-dropdown">
@@ -115,14 +115,14 @@ const Header = () => {
         </div>
         
         {/* Center - Logo */}
-        <div className="header-center" style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
-          <Link to="/">
+        <div className="header-center">
+          <Link to="/" className="header-logo-link">
             <img src="/logo.jpeg" alt="Satvikana" className="logo" />
           </Link>
         </div>
         
         {/* Right - Bulk Order & Icons */}
-        <div className="header-right" style={{ flex: 1, display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '20px' }}>
+        <div className="header-right">
           <a
             href="https://wa.me/918401430933?text=Hello%20Satvikana!%20I%20am%20interested%20in%20placing%20a%20Bulk%20Order."
             target="_blank"
@@ -135,27 +135,16 @@ const Header = () => {
             <span className="bulk-order-text">Bulk Order</span>
           </a>
 
-          <Link to="/cart" className="icon-btn" style={{ position: 'relative' }}>
-            <ShoppingCart size={24} />
+          <Link to="/cart" className="icon-btn header-cart-btn" aria-label="Shopping Cart">
+            <ShoppingCart size={22} />
             {cartItemCount > 0 && (
-              <span style={{
-                position: 'absolute',
-                top: '-8px',
-                right: '-10px',
-                background: '#ff4d4d',
-                color: 'white',
-                borderRadius: '50%',
-                padding: '2px 7px',
-                fontSize: '0.75rem',
-                fontWeight: 'bold',
-                boxShadow: '0 2px 5px rgba(0,0,0,0.2)'
-              }}>
+              <span className="cart-badge">
                 {cartItemCount}
               </span>
             )}
           </Link>
-          <Link to="/auth" className="icon-btn">
-            <User size={24} />
+          <Link to="/auth" className="icon-btn header-user-btn" aria-label="Account">
+            <User size={22} />
           </Link>
         </div>
 
