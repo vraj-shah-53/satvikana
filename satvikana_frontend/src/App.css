@@ -139,7 +139,7 @@ a {
 }
 
 .header-center .logo {
-  height: 80px;
+  height: 105px;
   object-fit: contain;
   transition: var(--transition);
 }
@@ -742,7 +742,7 @@ a {
   }
   
   .header-center .logo {
-    height: 60px;
+    height: 80px;
   }
   
   .footer-content {
@@ -771,7 +771,7 @@ a {
   }
   
   .header-center .logo {
-    height: 48px;
+    height: 65px;
   }
 
   .header-right {
