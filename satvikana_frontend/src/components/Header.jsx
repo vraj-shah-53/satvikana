@@ -1,6 +1,6 @@
 import React, { useState, useContext, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingCart, User, Menu, X } from 'lucide-react';
+import { ShoppingCart, User, Menu, X, MessageCircle } from 'lucide-react';
 import { CartContext } from '../CartContext';
 
 const Header = () => {
@@ -121,8 +121,20 @@ const Header = () => {
           </Link>
         </div>
         
-        {/* Right - Icons */}
-        <div className="header-right" style={{ flex: 1, display: 'flex', justifyContent: 'flex-end', gap: '20px' }}>
+        {/* Right - Bulk Order & Icons */}
+        <div className="header-right" style={{ flex: 1, display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '20px' }}>
+          <a
+            href="https://wa.me/918401430933?text=Hello%20Satvikana!%20I%20am%20interested%20in%20placing%20a%20Bulk%20Order."
+            target="_blank"
+            rel="noreferrer"
+            className="bulk-order-btn"
+            title="Place Bulk Order via WhatsApp (8401430933)"
+          >
+            <span className="bulk-order-dot"></span>
+            <MessageCircle size={15} className="bulk-order-icon" />
+            <span className="bulk-order-text">Bulk Order</span>
+          </a>
+
           <Link to="/cart" className="icon-btn" style={{ position: 'relative' }}>
             <ShoppingCart size={24} />
             {cartItemCount > 0 && (

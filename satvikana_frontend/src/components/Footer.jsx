@@ -206,7 +206,16 @@ const Footer = () => {
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: mutedBeige, marginBottom: '20px', fontSize: '0.9rem' }}>
             <Phone size={16} style={{ color: accentGold }} />
-            <span>+91 79908 06243</span>
+            <a 
+              href="https://wa.me/918401430933" 
+              target="_blank" 
+              rel="noreferrer" 
+              style={{ color: mutedBeige, textDecoration: 'none', transition: 'color 0.2s' }}
+              onMouseEnter={(e) => e.target.style.color = '#ffffff'}
+              onMouseLeave={(e) => e.target.style.color = mutedBeige}
+            >
+              +91 84014 30933
+            </a>
           </div>
 
           <div style={{ height: '1px', backgroundColor: 'rgba(255, 255, 255, 0.08)', margin: '20px 0' }} />
