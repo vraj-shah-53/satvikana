@@ -13,7 +13,7 @@ import {
   MessageSquare, 
   MapPin, 
   CreditCard, 
-  DollarSign, 
+  IndianRupee, 
   Package, 
   ShoppingBag,
   ExternalLink,
@@ -731,7 +731,7 @@ const AdminOrders = () => {
               alignItems: 'center', 
               justifyContent: 'center' 
             }}>
-              <DollarSign size={24} />
+              <IndianRupee size={24} />
             </div>
             <div>
               <p style={{ margin: 0, fontSize: '0.8rem', color: 'rgba(255, 255, 255, 0.8)', fontWeight: '600' }}>TOTAL REVENUE</p>
