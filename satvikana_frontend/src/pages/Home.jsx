@@ -47,27 +47,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Khapli Wheat Info Section */}
-      <section className="khapli-section home-section">
-        <div className="home-section-img-wrapper">
-          <img src="/khapli_story.jpg" alt="The Story of Khapli Wheat" style={{ width: '100%', height: 'auto', display: 'block' }} />
-        </div>
-        <div className="home-section-content" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-          <h2 className="section-title" style={{ textAlign: 'left', margin: 0 }}>Why Khapli Aata is <span>Better?</span></h2>
-          <p style={{ fontSize: '1.15rem', lineHeight: '1.8', color: 'var(--text-secondary)', margin: 0 }}>
-            Khapli wheat, also known as ancient grain, is naturally richer in nutrients and easier to digest compared to regular wheat. With its low glycemic index and high fiber content, it supports better digestion and helps maintain balanced energy levels throughout the day.
-          </p>
-          <p style={{ fontSize: '1.15rem', lineHeight: '1.8', color: 'var(--text-secondary)', margin: 0, fontWeight: 'bold' }}>
-            Make a healthier switch for your daily rotis with Satvikana Khapli Aata.
-          </p>
-          <Link to="/products/flour" style={{ alignSelf: 'flex-start', marginTop: '10px' }}>
-            <button className="shop-btn" style={{ padding: '15px 35px', fontSize: '1.1rem', borderRadius: '30px', background: 'var(--accent-color)', color: 'white', border: 'none', cursor: 'pointer', fontWeight: 'bold', boxShadow: '0 8px 25px rgba(212, 136, 6, 0.3)', transition: 'all 0.3s' }}>
-              Switch to Gluten Free Flour
-            </button>
-          </Link>
-        </div>
-      </section>
-
       {/* Testimonials */}
       <section className="testimonials">
         <h2 className="section-title">What Our <span>Customers Say</span></h2>

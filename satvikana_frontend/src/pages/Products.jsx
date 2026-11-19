@@ -29,8 +29,6 @@ const Products = () => {
         return <>Flavoured <span>Makhana</span></>;
       case 'combo':
         return <>Makhana <span>Combo</span></>;
-      case 'flour':
-        return <>Khapli <span>Wheat Flour</span></>;
       default:
         return <>All <span>Products</span></>;
     }

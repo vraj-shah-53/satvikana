@@ -81,7 +81,6 @@ const Header = () => {
                       <Link to="/products/raw" className="nav-dropdown-link" onClick={() => { setIsMenuOpen(false); setIsProductsSubmenuOpen(false); }}>Raw Makhana</Link>
                       <Link to="/products/flavoured" className="nav-dropdown-link" onClick={() => { setIsMenuOpen(false); setIsProductsSubmenuOpen(false); }}>Flavoured Makhana</Link>
                       <Link to="/products/combo" className="nav-dropdown-link" onClick={() => { setIsMenuOpen(false); setIsProductsSubmenuOpen(false); }}>Makhana Combo</Link>
-                      <Link to="/products/flour" className="nav-dropdown-link" onClick={() => { setIsMenuOpen(false); setIsProductsSubmenuOpen(false); }}>Khapli Wheat Flour</Link>
                     </div>
                   )}
                 </div>

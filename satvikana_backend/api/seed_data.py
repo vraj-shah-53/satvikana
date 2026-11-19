@@ -81,23 +81,6 @@ def run_seed():
             "image": "products/product_raw_makhana.webp",
             "description": "Enjoy the pure goodness of Satvikana Raw Makhana. Carefully selected, 100% organic and natural premium grade fox nuts. Rich in protein, calcium, and antioxidants. A perfect healthy ingredient or snack base."
         },
-        # Khapli Wheat Flour
-        {
-            "name": "Satvikana Khapli Wheat flour (GMO FREE- LAB TESTED) - 2kg | 2kg Pack",
-            "price": 399.00,
-            "original_price": 499.00,
-            "category": "flour",
-            "image": "products/product_khapli_2kg.webp",
-            "description": "Pure stoneground Khapli (Emmer) wheat flour, GMO free and lab tested. Rich in dietary fiber, vitamins, and minerals. Perfect for making soft, premium, and healthy chapatis and rotis."
-        },
-        {
-            "name": "Satvikana Khapli Wheat flour (GMO FREE- LAB TESTED) - 1kg | 1kg Pack",
-            "price": 199.00,
-            "original_price": 249.00,
-            "category": "flour",
-            "image": "products/product_khapli_1kg.webp",
-            "description": "Pure stoneground Khapli (Emmer) wheat flour, GMO free and lab tested. Rich in dietary fiber, vitamins, and minerals. Perfect for making soft, premium, and healthy chapatis and rotis."
-        }
     ]
 
     # Frontend public directory path relative to settings or this file

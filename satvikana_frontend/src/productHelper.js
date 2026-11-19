@@ -84,24 +84,6 @@ export const FALLBACK_PRODUCTS = [
     "image": "products/product_raw_makhana.webp"
   },
   {
-    "id": 150,
-    "name": "Satvikana Khapli Wheat flour (GMO FREE- LAB TESTED) - 2kg | 2kg Pack",
-    "description": "Pure stoneground Khapli (Emmer) wheat flour, GMO free and lab tested. Rich in dietary fiber, vitamins, and minerals. Perfect for making soft, premium, and healthy chapatis and rotis.",
-    "price": "399.00",
-    "original_price": "499.00",
-    "category": "flour",
-    "image": "products/product_khapli_2kg.webp"
-  },
-  {
-    "id": 151,
-    "name": "Satvikana Khapli Wheat flour (GMO FREE- LAB TESTED) - 1kg | 1kg Pack",
-    "description": "Pure stoneground Khapli (Emmer) wheat flour, GMO free and lab tested. Rich in dietary fiber, vitamins, and minerals. Perfect for making soft, premium, and healthy chapatis and rotis.",
-    "price": "199.00",
-    "original_price": "249.00",
-    "category": "flour",
-    "image": "products/product_khapli_1kg.webp"
-  },
-  {
     "id": 152,
     "name": "Satvikana Roasted Makhana Combo (Chaat Masala & Himalayan Salt) 70x2 gm | Gluten Free | No Added Preservatives | Rich in Protein & Calcium | Healthy Superfood Snack Combo",
     "description": "Get the best of both worlds with our Satvikana Roasted Makhana Combo. Contains 2 packs of 70g each: one delicious Chaat Masala & one delicious Himalayan Salt. 100% natural, roasted to perfection & coated with premium spices. The perfect guilt-free snack combo.",
