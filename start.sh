@@ -5,7 +5,6 @@ echo "=================================================="
 echo "    Starting Satvikana Backend Application        "
 echo "=================================================="
 
-# Determine base directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
@@ -29,40 +28,53 @@ if command -v python3 &>/dev/null; then
 elif command -v python &>/dev/null; then
     PYTHON_EXEC=python
 else
-    echo "ERROR: python3 or python command not found on system!"
+    echo "ERROR: python3 not found!"
     exit 1
 fi
 
-echo "Python version: $($PYTHON_EXEC --version)"
+echo "Python: $($PYTHON_EXEC --version)"
 
-# 2. Virtual Environment
+# 2. Virtual Environment Setup
 VENV_DIR="$ROOT_DIR/venv"
-if [ ! -d "$VENV_DIR" ] || [ ! -f "$VENV_DIR/bin/gunicorn" ]; then
-    echo "Creating virtual environment in $VENV_DIR..."
-    $PYTHON_EXEC -m venv "$VENV_DIR"
+if [ ! -f "$VENV_DIR/bin/gunicorn" ] || [ ! -f "$VENV_DIR/bin/python" ]; then
+    echo "Configuring virtual environment in $VENV_DIR..."
+    rm -rf "$VENV_DIR"
     
-    echo "Upgrading pip..."
-    "$VENV_DIR/bin/pip" install --upgrade pip
-    
-    echo "Installing dependencies..."
-    if [ -f "$ROOT_DIR/requirements.txt" ]; then
-        "$VENV_DIR/bin/pip" install -r "$ROOT_DIR/requirements.txt"
-    elif [ -f "$BACKEND_DIR/requirements.txt" ]; then
-        "$VENV_DIR/bin/pip" install -r "$BACKEND_DIR/requirements.txt"
+    # Try standard venv; fallback to --without-pip when ensurepip is missing on Debian/Ubuntu
+    if ! $PYTHON_EXEC -m venv "$VENV_DIR" 2>/dev/null; then
+        echo "ensurepip unavailable on system. Creating venv with --without-pip..."
+        $PYTHON_EXEC -m venv --without-pip "$VENV_DIR"
+        
+        echo "Bootstrapping pip into virtual environment..."
+        if [ -f "$ROOT_DIR/get-pip.py" ]; then
+            "$VENV_DIR/bin/python" "$ROOT_DIR/get-pip.py" --no-setuptools --no-wheel
+        elif [ -f "$BACKEND_DIR/get-pip.py" ]; then
+            "$VENV_DIR/bin/python" "$BACKEND_DIR/get-pip.py" --no-setuptools --no-wheel
+        else
+            curl -sS https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py || wget -qO /tmp/get-pip.py https://bootstrap.pypa.io/get-pip.py
+            "$VENV_DIR/bin/python" /tmp/get-pip.py --no-setuptools --no-wheel
+            rm -f /tmp/get-pip.py
+        fi
     fi
     
-    # Ensure gunicorn is installed
-    "$VENV_DIR/bin/pip" install "gunicorn>=21.2.0"
+    echo "Installing project dependencies..."
+    if [ -f "$ROOT_DIR/requirements.txt" ]; then
+        "$VENV_DIR/bin/pip" install --no-cache-dir -r "$ROOT_DIR/requirements.txt"
+    elif [ -f "$BACKEND_DIR/requirements.txt" ]; then
+        "$VENV_DIR/bin/pip" install --no-cache-dir -r "$BACKEND_DIR/requirements.txt"
+    fi
+    
+    "$VENV_DIR/bin/pip" install --no-cache-dir "gunicorn>=21.2.0"
 fi
 
-# 3. Enter backend directory for Django operations
+# 3. Enter backend directory
 cd "$BACKEND_DIR"
 
 # 4. Run migrations
 echo "Applying database migrations..."
 "$VENV_DIR/bin/python" manage.py migrate --noinput || true
 
-# 5. Populate initial data if database is new
+# 5. Populate initial data if needed
 if [ -f "populate.py" ]; then
     echo "Checking initial seed data..."
     "$VENV_DIR/bin/python" populate.py || true
