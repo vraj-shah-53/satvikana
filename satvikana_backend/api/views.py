@@ -11,15 +11,35 @@ class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
     permission_classes = [permissions.AllowAny]
 
+ADMIN_EMAILS = ['vrajjshah53@gmail.com', 'diyajaventures@gmail.com']
+
+def is_admin_user(user):
+    if not user or not user.is_authenticated:
+        return False
+    user_email = (user.email or '').lower().strip()
+    user_name = (user.username or '').lower().strip()
+    admin_list = [e.lower() for e in ADMIN_EMAILS]
+    return user.is_staff or user.is_superuser or user_email in admin_list or user_name in admin_list
+
 class OrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
         user = self.request.user
-        if user.is_staff or user.email == 'vrajjshah53@gmail.com':
+        if is_admin_user(user):
             return Order.objects.all().order_by('-created_at')
         return Order.objects.filter(user=user).order_by('-created_at')
+
+    def partial_update(self, request, *args, **kwargs):
+        if not is_admin_user(request.user):
+            return Response({'error': 'Unauthorized. Only Satvikana owners can update order status.'}, status=status.HTTP_403_FORBIDDEN)
+        return super().partial_update(request, *args, **kwargs)
+
+    def update(self, request, *args, **kwargs):
+        if not is_admin_user(request.user):
+            return Response({'error': 'Unauthorized. Only Satvikana owners can update order details.'}, status=status.HTTP_403_FORBIDDEN)
+        return super().update(request, *args, **kwargs)
 
     def create(self, request, *args, **kwargs):
         # Expecting items in request data
@@ -31,6 +51,8 @@ class OrderViewSet(viewsets.ModelViewSet):
         contact = data.get('contact', '')
         instructions = data.get('instructions', '')
         payment_method = data.get('payment_method', 'UPI')
+        payment_status = data.get('payment_status', 'PAID')
+        payment_id = data.get('payment_id', '')
         
         order = Order.objects.create(
             user=request.user,
@@ -40,7 +62,9 @@ class OrderViewSet(viewsets.ModelViewSet):
             address=address,
             contact=contact,
             instructions=instructions,
-            payment_method=payment_method
+            payment_method=payment_method,
+            payment_status=payment_status,
+            payment_id=payment_id
         )
         
         for item in items:
@@ -77,21 +101,31 @@ class RegisterView(generics.CreateAPIView):
         token, created = Token.objects.get_or_create(user=user)
         # Ensure user profile exists
         UserProfile.objects.get_or_create(user=user)
-        return Response({'token': token.key, 'user': UserSerializer(user).data}, status=status.HTTP_201_CREATED)
+        user_data = UserSerializer(user).data
+        user_data['is_admin'] = is_admin_user(user)
+        return Response({'token': token.key, 'user': user_data}, status=status.HTTP_201_CREATED)
 
 class LoginView(APIView):
     permission_classes = (permissions.AllowAny,)
 
     def post(self, request):
-        username = request.data.get('username')
-        password = request.data.get('password')
-        user = authenticate(username=username, password=password)
+        raw_username = request.data.get('username', '').strip()
+        password = request.data.get('password', '')
+
+        # Try case-insensitive matching for username or email
+        target_user = User.objects.filter(username__iexact=raw_username).first() or \
+                      User.objects.filter(email__iexact=raw_username).first()
+        auth_username = target_user.username if target_user else raw_username
+
+        user = authenticate(username=auth_username, password=password)
         if user:
             token, created = Token.objects.get_or_create(user=user)
             # Ensure user profile exists
             UserProfile.objects.get_or_create(user=user)
-            return Response({'token': token.key, 'user': UserSerializer(user).data})
-        return Response({'error': 'Invalid Credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+            user_data = UserSerializer(user).data
+            user_data['is_admin'] = is_admin_user(user)
+            return Response({'token': token.key, 'user': user_data})
+        return Response({'error': 'Invalid Credentials. Please verify your email/username and password.'}, status=status.HTTP_401_UNAUTHORIZED)
 
 class ProfileView(APIView):
     permission_classes = [permissions.IsAuthenticated]

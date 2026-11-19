@@ -40,7 +40,9 @@ const Header = () => {
   const token = localStorage.getItem('satvikana_token');
   const userStr = localStorage.getItem('satvikana_user');
   const user = userStr ? JSON.parse(userStr) : null;
-  const isAdmin = user && user.email === 'vrajjshah53@gmail.com';
+  const ADMIN_EMAILS = ['vrajjshah53@gmail.com', 'diyajaventures@gmail.com'];
+  const userEmail = (user?.email || user?.username || '').toLowerCase();
+  const isAdmin = Boolean(user && (user.is_admin || ADMIN_EMAILS.includes(userEmail)));
 
   return (
     <header className="header">
