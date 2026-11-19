@@ -41,6 +41,11 @@ class OrderViewSet(viewsets.ModelViewSet):
             return Response({'error': 'Unauthorized. Only Satvikana owners can update order details.'}, status=status.HTTP_403_FORBIDDEN)
         return super().update(request, *args, **kwargs)
 
+    def destroy(self, request, *args, **kwargs):
+        if not is_admin_user(request.user):
+            return Response({'error': 'Unauthorized. Only Satvikana owners can delete orders.'}, status=status.HTTP_403_FORBIDDEN)
+        return super().destroy(request, *args, **kwargs)
+
     def create(self, request, *args, **kwargs):
         # Expecting items in request data
         data = request.data

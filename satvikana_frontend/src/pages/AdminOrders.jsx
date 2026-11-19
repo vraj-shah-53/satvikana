@@ -16,7 +16,8 @@ import {
   DollarSign, 
   Package, 
   ShoppingBag,
-  ExternalLink
+  ExternalLink,
+  Trash2
 } from 'lucide-react';
 import { API_BASE_URL } from '../config';
 
@@ -144,6 +145,32 @@ const AdminOrders = () => {
       );
     } catch (err) {
       alert(`Status Update Error: ${err.message}`);
+    } finally {
+      setUpdatingOrderId(null);
+    }
+  };
+
+  const handleDeleteOrder = async (orderId) => {
+    if (!window.confirm(`Are you sure you want to permanently delete Order #${orderId}? This cannot be undone.`)) {
+      return;
+    }
+    setUpdatingOrderId(orderId);
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/orders/${orderId}/`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Token ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!res.ok && res.status !== 204) {
+        throw new Error('Failed to delete order.');
+      }
+
+      setOrders(prevOrders => prevOrders.filter(o => o.id !== orderId));
+    } catch (err) {
+      alert(`Delete Error: ${err.message}`);
     } finally {
       setUpdatingOrderId(null);
     }
@@ -1154,6 +1181,28 @@ const AdminOrders = () => {
                         Reset to Pending
                       </button>
                     )}
+
+                    <button 
+                      onClick={() => handleDeleteOrder(order.id)}
+                      disabled={updatingOrderId === order.id}
+                      style={{ 
+                        padding: '7px 14px', 
+                        fontSize: '0.82rem', 
+                        fontWeight: '600',
+                        backgroundColor: '#FFF5F5', 
+                        color: '#D32F2F', 
+                        border: '1px solid #FFCDD2', 
+                        borderRadius: '8px', 
+                        cursor: 'pointer',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '4px',
+                        transition: 'background 0.2s ease'
+                      }}
+                      title="Permanently delete this order"
+                    >
+                      <Trash2 size={13} /> Delete
+                    </button>
                   </div>
 
                 </div>
