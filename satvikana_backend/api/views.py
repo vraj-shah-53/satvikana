@@ -23,13 +23,15 @@ def is_admin_user(user):
 
 class OrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
     def get_queryset(self):
         user = self.request.user
         if is_admin_user(user):
             return Order.objects.all().order_by('-created_at')
-        return Order.objects.filter(user=user).order_by('-created_at')
+        if user and user.is_authenticated:
+            return Order.objects.filter(user=user).order_by('-created_at')
+        return Order.objects.none()
 
     def partial_update(self, request, *args, **kwargs):
         if not is_admin_user(request.user):
@@ -59,8 +61,18 @@ class OrderViewSet(viewsets.ModelViewSet):
         payment_status = data.get('payment_status', 'PAID')
         payment_id = data.get('payment_id', '')
         
+        order_user = request.user if request.user.is_authenticated else None
+        if not order_user:
+            try:
+                order_user, _ = User.objects.get_or_create(
+                    username='guest_customer',
+                    defaults={'email': 'guest@satvikana.com', 'first_name': 'Guest Customer'}
+                )
+            except Exception:
+                order_user = None
+
         order = Order.objects.create(
-            user=request.user,
+            user=order_user,
             total_price=total_price,
             status='PENDING',
             name=name,
@@ -202,10 +214,10 @@ def _cf_call(method, endpoint, payload=None):
 
 
 class CashfreeCreateOrderView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
     def post(self, request):
-        user = request.user
+        user = request.user if request.user.is_authenticated else None
         data = request.data
         items = data.get('items', [])
         name = data.get('name', '').strip()
@@ -247,16 +259,20 @@ class CashfreeCreateOrderView(APIView):
             phone_digits = phone_digits.ljust(10, '0')
 
         # Generate unique order_id (<= 45 chars, alphanumeric, _ and -)
-        unique_order_id = f"order_sat_{int(time.time())}_{str(user.id)[-4:]}"
+        user_suffix = str(user.id)[-4:] if user else phone_digits[-4:]
+        unique_order_id = f"order_sat_{int(time.time())}_{user_suffix}"
+
+        cust_id = f"cust_{user.id}" if user else f"guest_{phone_digits}"
+        cust_email = (user.email or f"{phone_digits}@guest.satvikana.com") if user else f"{phone_digits}@guest.satvikana.com"
 
         cf_payload = {
             'order_id': unique_order_id,
             'order_amount': round(float(total_price), 2),
             'order_currency': 'INR',
             'customer_details': {
-                'customer_id': f"cust_{user.id}",
+                'customer_id': cust_id[:50],
                 'customer_name': name[:90],
-                'customer_email': (user.email or 'customer@satvikana.com')[:90],
+                'customer_email': cust_email[:90],
                 'customer_phone': phone_digits
             },
             'order_meta': {
@@ -291,10 +307,10 @@ class CashfreeCreateOrderView(APIView):
 
 
 class CashfreeVerifyPaymentView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
     def post(self, request):
-        user = request.user
+        user = request.user if request.user.is_authenticated else None
         data = request.data
         cf_order_id = data.get('order_id', '').strip()
         shipping = data.get('shipping', {})
@@ -340,13 +356,23 @@ class CashfreeVerifyPaymentView(APIView):
 
             # 3. Create the verified Order in database
             total_amount = cf_order_data.get('order_amount', 0)
-            name = shipping.get('name') or user.username
+            name = shipping.get('name') or (user.username if user else 'Customer')
             address = shipping.get('address') or ''
             contact = shipping.get('contact') or ''
             instructions = shipping.get('instructions') or ''
 
+            order_user = user
+            if not order_user:
+                try:
+                    order_user, _ = User.objects.get_or_create(
+                        username='guest_customer',
+                        defaults={'email': 'guest@satvikana.com', 'first_name': 'Guest Customer'}
+                    )
+                except Exception:
+                    order_user = None
+
             order = Order.objects.create(
-                user=user,
+                user=order_user,
                 total_price=total_amount,
                 status='PENDING',
                 name=name,
@@ -371,15 +397,16 @@ class CashfreeVerifyPaymentView(APIView):
                 except Exception as item_err:
                     print('Error adding item to order:', item_err)
 
-            # Update User profile with address and contact
-            try:
-                profile, _ = UserProfile.objects.get_or_create(user=user)
-                if name: profile.name = name
-                if address: profile.address = address
-                if contact: profile.contact = contact
-                profile.save()
-            except Exception:
-                pass
+            # Update User profile with address and contact if user is logged in
+            if user:
+                try:
+                    profile, _ = UserProfile.objects.get_or_create(user=user)
+                    if name: profile.name = name
+                    if address: profile.address = address
+                    if contact: profile.contact = contact
+                    profile.save()
+                except Exception:
+                    pass
 
             return Response({
                 'success': True,

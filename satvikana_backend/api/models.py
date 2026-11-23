@@ -25,7 +25,7 @@ class Order(models.Model):
         ('DISPATCHED', 'Dispatched'),
         ('FINISHED', 'Finished'),
     )
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='PENDING')
     created_at = models.DateTimeField(auto_now_add=True)
@@ -40,7 +40,8 @@ class Order(models.Model):
     payment_id = models.CharField(max_length=200, blank=True, null=True, default='')
 
     def __str__(self):
-        return f"Order {self.id} by {self.user.username}"
+        username = self.user.username if self.user else (self.name or 'Guest')
+        return f"Order {self.id} by {username}"
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)
