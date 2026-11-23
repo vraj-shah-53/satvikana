@@ -297,6 +297,52 @@
   background: #15803D !important;
 }
 
+/* More Products Button Container */
+.featured-more-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 32px;
+}
+
+.featured-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #FFFFFF;
+  color: var(--primary-color, #2F5233);
+  border: 2px solid var(--primary-color, #2F5233);
+  padding: 12px 36px;
+  border-radius: 30px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-family: 'Outfit', sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.28s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 4px 15px rgba(47, 82, 51, 0.08);
+  letter-spacing: 0.3px;
+}
+
+.featured-more-btn:hover {
+  background: var(--primary-color, #2F5233);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(47, 82, 51, 0.22);
+}
+
+.featured-more-btn:active {
+  transform: translateY(0);
+}
+
+.featured-more-btn svg {
+  transition: transform 0.25s ease;
+}
+
+.featured-more-btn:hover svg {
+  transform: translateX(4px);
+}
+
 /* ============================================================
    Responsive Breakpoints
    ============================================================ */
@@ -370,6 +416,16 @@
   }
   .featured-card:last-child .featured-card-top {
     margin-bottom: 4px;
+  }
+  .featured-more-container {
+    margin-top: 24px;
+  }
+  .featured-more-btn {
+    padding: 11px 28px;
+    font-size: 0.95rem;
+    width: 90%;
+    max-width: 320px;
+    justify-content: center;
   }
 }
 

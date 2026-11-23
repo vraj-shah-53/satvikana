@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingCart, Star, Heart, Check } from 'lucide-react';
+import { ShoppingCart, Star, Heart, Check, ArrowRight } from 'lucide-react';
 import { CartContext } from '../CartContext';
 import { getInitialProducts, syncProducts } from '../productHelper';
 import './FeaturedFlavours.css';
@@ -271,6 +271,14 @@ const FeaturedFlavours = () => {
             </div>
           );
         })}
+      </div>
+
+      {/* Button for More Products */}
+      <div className="featured-more-container">
+        <Link to="/products" className="featured-more-btn" title="Explore all Satvikana products">
+          <span>More Products</span>
+          <ArrowRight size={18} />
+        </Link>
       </div>
     </section>
   );
