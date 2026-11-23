@@ -1,19 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Makhana3DCarousel from '../components/Makhana3DCarousel';
+import FeaturedFlavours from '../components/FeaturedFlavours';
 
 const Home = () => {
   return (
-    <div>
-      {/* Hero Banner Section */}
+    <div className="home-page">
+      {/* 1. Featured Flavours Section - ABOVE the Hero Banner */}
+      <FeaturedFlavours />
+
+      {/* 2. Hero Banner Section - BELOW Featured Flavours */}
       <section className="hero-banner-container">
         <img src="/home_banner.png" alt="Satvikana Banner" className="hero-banner-img" />
       </section>
 
-      {/* 3D E-Commerce Carousel for Flavoured Makhana Products */}
-      <Makhana3DCarousel />
-
-      {/* Photos Section */}
+      {/* 3. Photos Section */}
       <section className="photos-section">
         <div className="photo-panel kid-panel">
           <img src="/kid.jpeg" alt="Kid loving Makhana" />
@@ -31,7 +31,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Factory and Health Benefits Section */}
+      {/* 4. Factory and Health Benefits Section */}
       <section className="factory-section home-section" style={{ background: 'var(--surface-color)' }}>
         <div className="home-section-img-wrapper" style={{ aspectRatio: '4/3' }}>
           <img src="/factory.jpeg" alt="Satvikana Factory" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -47,7 +47,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Testimonials */}
+      {/* 5. Testimonials */}
       <section className="testimonials">
         <h2 className="section-title">What Our <span>Customers Say</span></h2>
         <div className="testimonial-grid">
