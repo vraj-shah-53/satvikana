@@ -170,11 +170,36 @@ def seed_db(request):
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-
 import time
 import re
-import requests
+import json
+import urllib.request
+import urllib.error
 from django.conf import settings
+
+def _cf_call(method, endpoint, payload=None):
+    url = f"{settings.CASHFREE_BASE_URL}{endpoint}"
+    headers = {
+        'x-client-id': settings.CASHFREE_APP_ID,
+        'x-client-secret': settings.CASHFREE_SECRET_KEY,
+        'x-api-version': settings.CASHFREE_API_VERSION,
+        'Content-Type': 'application/json'
+    }
+    data = json.dumps(payload).encode('utf-8') if payload else None
+    req = urllib.request.Request(url, data=data, headers=headers, method=method)
+    try:
+        with urllib.request.urlopen(req, timeout=20) as resp:
+            body = resp.read().decode('utf-8')
+            return resp.status, json.loads(body)
+    except urllib.error.HTTPError as e:
+        body = e.read().decode('utf-8')
+        try:
+            return e.code, json.loads(body)
+        except Exception:
+            return e.code, {'message': body}
+    except Exception as e:
+        return 500, {'message': str(e)}
+
 
 class CashfreeCreateOrderView(APIView):
     permission_classes = [permissions.IsAuthenticated]
@@ -224,13 +249,6 @@ class CashfreeCreateOrderView(APIView):
         # Generate unique order_id (<= 45 chars, alphanumeric, _ and -)
         unique_order_id = f"order_sat_{int(time.time())}_{str(user.id)[-4:]}"
 
-        cf_headers = {
-            'x-client-id': settings.CASHFREE_APP_ID,
-            'x-client-secret': settings.CASHFREE_SECRET_KEY,
-            'x-api-version': settings.CASHFREE_API_VERSION,
-            'Content-Type': 'application/json'
-        }
-
         cf_payload = {
             'order_id': unique_order_id,
             'order_amount': round(float(total_price), 2),
@@ -248,11 +266,9 @@ class CashfreeCreateOrderView(APIView):
         }
 
         try:
-            cf_url = f"{settings.CASHFREE_BASE_URL}/orders"
-            cf_resp = requests.post(cf_url, headers=cf_headers, json=cf_payload, timeout=20)
-            cf_data = cf_resp.json()
+            status_code, cf_data = _cf_call('POST', '/orders', cf_payload)
 
-            if cf_resp.status_code not in (200, 201):
+            if status_code not in (200, 201):
                 err_msg = cf_data.get('message', 'Cashfree order generation failed.')
                 return Response({'error': err_msg, 'details': cf_data}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -296,21 +312,12 @@ class CashfreeVerifyPaymentView(APIView):
                 'order': OrderSerializer(existing_order).data
             })
 
-        cf_headers = {
-            'x-client-id': settings.CASHFREE_APP_ID,
-            'x-client-secret': settings.CASHFREE_SECRET_KEY,
-            'x-api-version': settings.CASHFREE_API_VERSION,
-            'Content-Type': 'application/json'
-        }
-
         try:
             # 1. Fetch order from Cashfree
-            order_url = f"{settings.CASHFREE_BASE_URL}/orders/{cf_order_id}"
-            cf_order_resp = requests.get(order_url, headers=cf_headers, timeout=20)
-            if cf_order_resp.status_code != 200:
+            status_code, cf_order_data = _cf_call('GET', f'/orders/{cf_order_id}')
+            if status_code != 200:
                 return Response({'error': 'Unable to verify order with Cashfree.'}, status=status.HTTP_400_BAD_REQUEST)
 
-            cf_order_data = cf_order_resp.json()
             order_status = cf_order_data.get('order_status')
 
             if order_status != 'PAID':
@@ -323,16 +330,13 @@ class CashfreeVerifyPaymentView(APIView):
             # 2. Fetch payments to get transaction id & method
             payment_method_str = 'Cashfree PG'
             tx_id = cf_order_id
-            payments_url = f"{settings.CASHFREE_BASE_URL}/orders/{cf_order_id}/payments"
-            cf_payments_resp = requests.get(payments_url, headers=cf_headers, timeout=20)
-            if cf_payments_resp.status_code == 200:
-                payments_list = cf_payments_resp.json()
-                if isinstance(payments_list, list) and len(payments_list) > 0:
-                    latest_pay = payments_list[-1]
-                    tx_id = str(latest_pay.get('cf_payment_id') or cf_order_id)
-                    pay_group = latest_pay.get('payment_group', '').upper()
-                    if pay_group:
-                        payment_method_str = f"Cashfree ({pay_group})"
+            pay_status, payments_list = _cf_call('GET', f'/orders/{cf_order_id}/payments')
+            if pay_status == 200 and isinstance(payments_list, list) and len(payments_list) > 0:
+                latest_pay = payments_list[-1]
+                tx_id = str(latest_pay.get('cf_payment_id') or cf_order_id)
+                pay_group = latest_pay.get('payment_group', '').upper()
+                if pay_group:
+                    payment_method_str = f"Cashfree ({pay_group})"
 
             # 3. Create the verified Order in database
             total_amount = cf_order_data.get('order_amount', 0)
