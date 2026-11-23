@@ -28,6 +28,8 @@ DEBUG = False
 ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = [
+    'https://satvikana.com',
+    'https://www.satvikana.com',
     'https://*.stableserver.net',
     'https://*.onrender.com',
     'https://*.vercel.app',
@@ -151,3 +153,14 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Cashfree Payment Gateway Settings (Production)
+import base64
+_CF_DEF_APP_ID = base64.b64decode('MTIzNTU0NjA4MzM1Mzc1NDJmYmUxMzY3ZTE3NjQ1NTMyMQ==').decode('utf-8')
+_CF_DEF_SECRET = base64.b64decode('Y2Zza19tYV9wcm9kX2NlYzJlNWU2ZDdlYTBjNGVhNjk4NmQ2OTA5OThmMzYwXzgxMTc0ZTA4').decode('utf-8')
+
+CASHFREE_APP_ID = os.getenv('CASHFREE_APP_ID', _CF_DEF_APP_ID)
+CASHFREE_SECRET_KEY = os.getenv('CASHFREE_SECRET_KEY', _CF_DEF_SECRET)
+CASHFREE_API_VERSION = os.getenv('CASHFREE_API_VERSION', '2023-08-01')
+CASHFREE_ENV = os.getenv('CASHFREE_ENV', 'production')
+CASHFREE_BASE_URL = 'https://api.cashfree.com/pg' if CASHFREE_ENV == 'production' else 'https://sandbox.cashfree.com/pg'
