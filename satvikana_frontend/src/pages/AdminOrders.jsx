@@ -32,6 +32,10 @@ const AdminOrders = () => {
   const [statusFilter, setStatusFilter] = useState('ALL');
   const [searchQuery, setSearchQuery] = useState('');
   const [updatingOrderId, setUpdatingOrderId] = useState(null);
+  const [syncingOrderId, setSyncingOrderId] = useState(null);
+  const [isAutoSyncEnabled, setIsAutoSyncEnabled] = useState(true);
+  const [lastSyncTime, setLastSyncTime] = useState('');
+  const [newOrderBanner, setNewOrderBanner] = useState(null);
 
   // Admin login details state
   const [adminEmail, setAdminEmail] = useState('');
@@ -47,9 +51,11 @@ const AdminOrders = () => {
   const userEmail = (currentUser?.email || currentUser?.username || '').toLowerCase().trim();
   const isAdmin = Boolean(currentUser && (currentUser.is_admin || ADMIN_EMAILS.includes(userEmail)));
 
-  const fetchAllOrders = async () => {
-    setLoading(true);
-    setError(null);
+  const fetchAllOrders = async (showLoading = true) => {
+    if (showLoading) {
+      setLoading(true);
+      setError(null);
+    }
     try {
       const res = await fetch(`${API_BASE_URL}/api/orders/`, {
         headers: {
@@ -63,21 +69,49 @@ const AdminOrders = () => {
       }
 
       const data = await res.json();
-      setOrders(Array.isArray(data) ? data : []);
+      const freshOrders = Array.isArray(data) ? data : [];
+
+      setOrders(prev => {
+        // Detect newly arrived orders in silent refresh
+        if (prev.length > 0 && freshOrders.length > prev.length) {
+          const prevIds = new Set(prev.map(o => o.id));
+          const newOnes = freshOrders.filter(o => !prevIds.has(o.id));
+          if (newOnes.length > 0) {
+            const latest = newOnes[0];
+            setNewOrderBanner({
+              id: latest.id,
+              name: latest.name || 'Guest Customer',
+              total_price: latest.total_price,
+              count: newOnes.length
+            });
+            setTimeout(() => setNewOrderBanner(null), 10000);
+          }
+        }
+        return freshOrders;
+      });
+
+      setLastSyncTime(new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
     } catch (err) {
-      setError(err.message);
+      if (showLoading) setError(err.message);
     } finally {
-      setLoading(false);
+      if (showLoading) setLoading(false);
     }
   };
 
   useEffect(() => {
     if (token && isAdmin) {
-      fetchAllOrders();
+      fetchAllOrders(true);
+
+      if (isAutoSyncEnabled) {
+        const interval = setInterval(() => {
+          fetchAllOrders(false);
+        }, 10000);
+        return () => clearInterval(interval);
+      }
     } else {
       setLoading(false);
     }
-  }, [token, isAdmin]);
+  }, [token, isAdmin, isAutoSyncEnabled]);
 
   const handleAdminLogin = async (e) => {
     e.preventDefault();
@@ -173,6 +207,34 @@ const AdminOrders = () => {
       alert(`Delete Error: ${err.message}`);
     } finally {
       setUpdatingOrderId(null);
+    }
+  };
+
+  const handleSyncCashfree = async (orderId) => {
+    setSyncingOrderId(orderId);
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/payment/sync-status/`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Token ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ order_id: orderId })
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || 'Failed to sync with Cashfree.');
+      }
+
+      if (data.order) {
+        setOrders(prev => prev.map(o => o.id === data.order.id ? data.order : o));
+      }
+      alert(data.message || `Order #${orderId} payment status: ${data.order?.payment_status || 'UNKNOWN'}`);
+    } catch (err) {
+      alert(`Sync Error: ${err.message}`);
+    } finally {
+      setSyncingOrderId(null);
     }
   };
 
@@ -543,9 +605,43 @@ const AdminOrders = () => {
             </p>
           </div>
 
-          <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
+            {/* Live Auto-Sync Indicator */}
+            <div 
+              onClick={() => setIsAutoSyncEnabled(prev => !prev)}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '8px 14px',
+                borderRadius: '12px',
+                background: isAutoSyncEnabled ? '#E8F5E9' : '#FFF3E0',
+                border: `1.5px solid ${isAutoSyncEnabled ? '#A5D6A7' : '#FFE082'}`,
+                cursor: 'pointer',
+                userSelect: 'none'
+              }}
+              title={isAutoSyncEnabled ? 'Live background auto-sync active (clicks to pause)' : 'Sync paused (click to activate)'}
+            >
+              <span style={{
+                width: '9px',
+                height: '9px',
+                borderRadius: '50%',
+                background: isAutoSyncEnabled ? '#2E7D32' : '#E65100',
+                display: 'inline-block',
+                boxShadow: isAutoSyncEnabled ? '0 0 0 3px rgba(46, 125, 50, 0.25)' : 'none'
+              }} />
+              <span style={{ fontSize: '0.82rem', fontWeight: '800', color: isAutoSyncEnabled ? '#2E7D32' : '#E65100' }}>
+                {isAutoSyncEnabled ? 'Live Sync Active (10s)' : 'Sync Paused'}
+              </span>
+              {lastSyncTime && (
+                <span style={{ fontSize: '0.75rem', color: '#666', fontWeight: '500' }}>
+                  {lastSyncTime}
+                </span>
+              )}
+            </div>
+
             <button 
-              onClick={fetchAllOrders}
+              onClick={() => fetchAllOrders(true)}
               style={{ 
                 display: 'inline-flex', 
                 alignItems: 'center', 
@@ -586,6 +682,49 @@ const AdminOrders = () => {
             </button>
           </div>
         </div>
+
+        {/* Live New Order Notification Banner */}
+        {newOrderBanner && (
+          <div style={{
+            background: 'linear-gradient(135deg, #1E4620 0%, #2F5233 100%)',
+            color: '#FFFFFF',
+            padding: '16px 22px',
+            borderRadius: '16px',
+            marginBottom: '22px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            boxShadow: '0 8px 25px rgba(30, 70, 32, 0.35)',
+            border: '1px solid rgba(255, 224, 130, 0.4)'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+              <span style={{ fontSize: '1.8rem' }}>🔔</span>
+              <div>
+                <strong style={{ fontSize: '1.05rem', color: '#FFE082' }}>
+                  New Order Received from Customer!
+                </strong>
+                <p style={{ margin: '3px 0 0', fontSize: '0.92rem', color: 'rgba(255, 255, 255, 0.95)' }}>
+                  Order <strong>#{newOrderBanner.id}</strong> by <strong>{newOrderBanner.name}</strong> for <strong>₹{parseFloat(newOrderBanner.total_price || 0).toFixed(2)}</strong> has just been recorded in real time.
+                </p>
+              </div>
+            </div>
+            <button 
+              onClick={() => setNewOrderBanner(null)}
+              style={{
+                background: 'rgba(255, 255, 255, 0.2)',
+                border: 'none',
+                color: '#FFFFFF',
+                borderRadius: '8px',
+                padding: '6px 14px',
+                cursor: 'pointer',
+                fontWeight: '700',
+                fontSize: '0.85rem'
+              }}
+            >
+              Dismiss
+            </button>
+          </div>
+        )}
 
         {/* KPI / Summary Metrics Cards */}
         <div style={{ 
@@ -725,13 +864,17 @@ const AdminOrders = () => {
               width: '48px', 
               height: '48px', 
               borderRadius: '12px', 
-              background: 'rgba(255, 255, 255, 0.15)', 
-              color: '#FFFFFF', 
+              background: 'rgba(255, 255, 255, 0.18)', 
+              color: '#FFE082', 
               display: 'flex', 
               alignItems: 'center', 
-              justifyContent: 'center' 
+              justifyContent: 'center',
+              fontSize: '1.75rem',
+              fontWeight: '900',
+              fontFamily: "'Outfit', 'Segoe UI', sans-serif",
+              lineHeight: 1
             }}>
-              <IndianRupee size={24} />
+              ₹
             </div>
             <div>
               <p style={{ margin: 0, fontSize: '0.8rem', color: 'rgba(255, 255, 255, 0.8)', fontWeight: '600' }}>TOTAL REVENUE</p>
@@ -1181,6 +1324,30 @@ const AdminOrders = () => {
                         Reset to Pending
                       </button>
                     )}
+
+                    {/* Sync with Cashfree Gateway */}
+                    <button 
+                      onClick={() => handleSyncCashfree(order.id)}
+                      disabled={syncingOrderId === order.id}
+                      style={{ 
+                        padding: '7px 14px', 
+                        fontSize: '0.82rem', 
+                        fontWeight: '700',
+                        backgroundColor: '#EDE7F6', 
+                        color: '#512DA8', 
+                        border: '1px solid #D1C4E9', 
+                        borderRadius: '8px', 
+                        cursor: syncingOrderId === order.id ? 'not-allowed' : 'pointer',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        transition: 'all 0.2s ease'
+                      }}
+                      title="Check and sync latest payment status from Cashfree"
+                    >
+                      <RefreshCw size={12} />
+                      {syncingOrderId === order.id ? 'Syncing...' : 'Sync Cashfree'}
+                    </button>
 
                     <button 
                       onClick={() => handleDeleteOrder(order.id)}

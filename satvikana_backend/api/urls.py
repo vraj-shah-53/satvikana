@@ -9,7 +9,9 @@ from .views import (
     ProfileView, 
     seed_db,
     CashfreeCreateOrderView,
-    CashfreeVerifyPaymentView
+    CashfreeVerifyPaymentView,
+    CashfreeSyncOrderStatusView,
+    CashfreeWebhookView
 )
 
 router = DefaultRouter()
@@ -25,4 +27,6 @@ urlpatterns = [
     path('seed/', seed_db, name='seed_db'),
     path('payment/create-order/', CashfreeCreateOrderView.as_view(), name='cf_create_order'),
     path('payment/verify/', CashfreeVerifyPaymentView.as_view(), name='cf_verify_payment'),
+    path('payment/sync-status/', CashfreeSyncOrderStatusView.as_view(), name='cf_sync_status'),
+    path('payment/webhook/', CashfreeWebhookView.as_view(), name='cf_webhook'),
 ]
