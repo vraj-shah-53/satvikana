@@ -10,20 +10,20 @@ const Home = () => {
 
       {/* 2. Hero Banner Section - BELOW Featured Flavours */}
       <section className="hero-banner-container">
-        <img src="/home_banner.png" alt="Satvikana Banner" className="hero-banner-img" />
+        <img src="/home_banner.png" alt="Satvikana Premium Roasted Makhana - Healthy Snacking Made Simple" className="hero-banner-img" />
       </section>
 
       {/* 3. Photos Section */}
       <section className="photos-section">
         <div className="photo-panel kid-panel">
-          <img src="/kid.jpeg" alt="Kid loving Makhana" />
+          <img src="/kid.jpeg" alt="Kids enjoying Satvikana Healthy Roasted Makhana Snacks" />
           <div className="photo-overlay">
             <h3>Joy in Every Bite</h3>
             <p>100% safe, nutritious, and loved by kids.</p>
           </div>
         </div>
         <div className="photo-panel">
-          <img src="/family.png" alt="Family enjoying Makhana" />
+          <img src="/family.png" alt="Indian family snacking healthy on Satvikana Fox Nuts" />
           <div className="photo-overlay">
             <h3>Family Time Essential</h3>
             <p>The perfect guilt-free snack for your evenings.</p>
@@ -34,7 +34,7 @@ const Home = () => {
       {/* 4. Factory and Health Benefits Section */}
       <section className="factory-section home-section" style={{ background: 'var(--surface-color)' }}>
         <div className="home-section-img-wrapper" style={{ aspectRatio: '4/3' }}>
-          <img src="/factory.jpeg" alt="Satvikana Factory" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          <img src="/factory.jpeg" alt="Satvikana Modern Hygienic Makhana Roasting & Processing Facility" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         </div>
         <div className="home-section-content">
           <h2 className="section-title" style={{ textAlign: 'left', marginBottom: '20px' }}>The <span>Makhana</span> Journey</h2>

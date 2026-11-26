@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <!-- Homepage -->
+  <url>
+    <loc>https://satvikana.com/</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://satvikana.com/home_banner.png</image:loc>
+      <image:title>Satvikana Premium Roasted Makhana</image:title>
+      <image:caption>Healthy Snacking Made Simple - 100% Roasted Natural Makhana</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Products Catalog -->
+  <url>
+    <loc>https://satvikana.com/products</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://satvikana.com/product_peri_peri.webp</image:loc>
+      <image:title>Peri Peri Roasted Makhana</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://satvikana.com/product_raw_makhana.webp</image:loc>
+      <image:title>Raw Organic Makhana</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://satvikana.com/product_cheesy_masti.webp</image:loc>
+      <image:title>Cheesy Masti Makhana</image:title>
+    </image:image>
+  </url>
+
+  <!-- Flavoured Makhana Category -->
+  <url>
+    <loc>https://satvikana.com/products/flavoured</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Raw Organic Makhana Category -->
+  <url>
+    <loc>https://satvikana.com/products/raw</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Healthy Makhana Recipes -->
+  <url>
+    <loc>https://satvikana.com/recipe</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://satvikana.com/makhana_paneer_curry.webp</image:loc>
+      <image:title>Makhana Paneer Curry Recipe</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://satvikana.com/makhana_kheer.avif</image:loc>
+      <image:title>Creamy Makhana Kheer Recipe</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://satvikana.com/makhana_bhel.jpg</image:loc>
+      <image:title>Crispy Makhana Bhel Recipe</image:title>
+    </image:image>
+  </url>
+
+  <!-- Why Satvikana / Health Benefits -->
+  <url>
+    <loc>https://satvikana.com/why-satvikana</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Contact & Bulk Orders -->
+  <url>
+    <loc>https://satvikana.com/contact</loc>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+</urlset>

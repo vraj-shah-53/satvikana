@@ -1,0 +1,21 @@
+# Robots.txt for Satvikana (https://satvikana.com)
+User-agent: *
+Allow: /
+Allow: /products
+Allow: /products/*
+Allow: /product/*
+Allow: /recipe
+Allow: /why-satvikana
+Allow: /contact
+
+# Disallow private user & checkout pages from search results
+Disallow: /admin-orders
+Disallow: /admin-portal
+Disallow: /admin/
+Disallow: /api/
+Disallow: /cart
+Disallow: /order-history
+Disallow: /auth
+
+# Search engine sitemap location
+Sitemap: https://satvikana.com/sitemap.xml

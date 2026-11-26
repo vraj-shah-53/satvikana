@@ -209,7 +209,7 @@ const FeaturedFlavours = () => {
                 <span className="weight-tag-mini">{def.weight}</span>
                 <img 
                   src={getProductImage(product)} 
-                  alt={def.title} 
+                  alt={`Satvikana ${def.title} ${def.weight} - 100% Roasted Natural Makhana Snack`} 
                   loading="lazy"
                 />
               </Link>
