@@ -15,8 +15,7 @@ import {
   Leaf,
   Clock,
   Heart,
-  FileText,
-  Download
+  FileText
 } from 'lucide-react';
 
 const ProductInfo = () => {
@@ -453,47 +452,6 @@ const ProductInfo = () => {
           <p style={{ margin: '12px 0 0', fontSize: '0.88rem', color: 'var(--text-secondary)' }}>
             Explore all freshly roasted flavours & order online with fast doorstep delivery.
           </p>
-        </div>
-
-        {/* Small Packaging QR Reference Box */}
-        <div style={{
-          background: 'rgba(47, 82, 51, 0.05)',
-          borderRadius: '16px',
-          padding: '16px 20px',
-          border: '1px dashed #2F5233',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-          gap: '12px'
-        }}>
-          <div>
-            <strong style={{ fontSize: '0.88rem', color: '#1E4620' }}>
-              Official Product QR Code
-            </strong>
-            <p style={{ margin: '2px 0 0', fontSize: '0.78rem', color: '#666' }}>
-              Printed on Satvikana bottles and pouches for instant verification.
-            </p>
-          </div>
-          <a 
-            href="/satvikana-qr.png" 
-            download="satvikana-qr-code.png"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              background: '#FFFFFF',
-              border: '1px solid #D6D0C4',
-              color: '#1E4620',
-              padding: '6px 14px',
-              borderRadius: '10px',
-              fontSize: '0.8rem',
-              fontWeight: '700',
-              textDecoration: 'none'
-            }}
-          >
-            <Download size={14} /> Download QR Image
-          </a>
         </div>
 
       </div>
