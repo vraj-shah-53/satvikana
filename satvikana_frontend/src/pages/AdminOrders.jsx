@@ -70,12 +70,14 @@ const AdminOrders = () => {
 
       const data = await res.json();
       const freshOrders = Array.isArray(data) ? data : [];
+      // Only keep orders where payment was completed / PAID
+      const paidFreshOrders = freshOrders.filter(o => (o.payment_status || 'PAID').toUpperCase() === 'PAID');
 
       setOrders(prev => {
-        // Detect newly arrived orders in silent refresh
-        if (prev.length > 0 && freshOrders.length > prev.length) {
+        // Detect newly arrived PAID orders in silent refresh
+        if (prev.length > 0 && paidFreshOrders.length > prev.length) {
           const prevIds = new Set(prev.map(o => o.id));
-          const newOnes = freshOrders.filter(o => !prevIds.has(o.id));
+          const newOnes = paidFreshOrders.filter(o => !prevIds.has(o.id));
           if (newOnes.length > 0) {
             const latest = newOnes[0];
             setNewOrderBanner({
@@ -87,7 +89,7 @@ const AdminOrders = () => {
             setTimeout(() => setNewOrderBanner(null), 10000);
           }
         }
-        return freshOrders;
+        return paidFreshOrders;
       });
 
       setLastSyncTime(new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
@@ -273,15 +275,18 @@ const AdminOrders = () => {
     };
   };
 
-  // Metrics calculations
-  const totalOrdersCount = orders.length;
-  const pendingOrdersCount = orders.filter(o => (o.status || '').toUpperCase() === 'PENDING').length;
-  const dispatchedOrdersCount = orders.filter(o => (o.status || '').toUpperCase() === 'DISPATCHED').length;
-  const finishedOrdersCount = orders.filter(o => (o.status || '').toUpperCase() === 'FINISHED').length;
-  const totalRevenue = orders.reduce((sum, o) => sum + parseFloat(o.total_price || 0), 0);
+  // Only display and count successfully PAID orders (unpaid/aborted checkouts are hidden)
+  const paidOrders = orders.filter(o => (o.payment_status || 'PAID').toUpperCase() === 'PAID');
+
+  // Metrics calculations (based strictly on PAID orders)
+  const totalOrdersCount = paidOrders.length;
+  const pendingOrdersCount = paidOrders.filter(o => (o.status || '').toUpperCase() === 'PENDING').length;
+  const dispatchedOrdersCount = paidOrders.filter(o => (o.status || '').toUpperCase() === 'DISPATCHED').length;
+  const finishedOrdersCount = paidOrders.filter(o => (o.status || '').toUpperCase() === 'FINISHED').length;
+  const totalRevenue = paidOrders.reduce((sum, o) => sum + parseFloat(o.total_price || 0), 0);
 
   // Filter & Search logic
-  const filteredOrders = orders.filter(order => {
+  const filteredOrders = paidOrders.filter(order => {
     // Status filter
     if (statusFilter !== 'ALL' && (order.status || '').toUpperCase() !== statusFilter) {
       return false;

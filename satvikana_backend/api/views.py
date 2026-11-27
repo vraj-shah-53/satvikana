@@ -28,9 +28,13 @@ class OrderViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         user = self.request.user
         if is_admin_user(user):
-            return Order.objects.all().order_by('-created_at')
+            # Only return orders where payment was completed successfully (PAID)
+            # Unpaid, abandoned, or aborted checkouts must NOT appear in the owner portal
+            if self.request.query_params.get('all') == 'true':
+                return Order.objects.all().order_by('-created_at')
+            return Order.objects.filter(payment_status='PAID').order_by('-created_at')
         if user and user.is_authenticated:
-            return Order.objects.filter(user=user).order_by('-created_at')
+            return Order.objects.filter(user=user, payment_status='PAID').order_by('-created_at')
         return Order.objects.none()
 
     def partial_update(self, request, *args, **kwargs):
