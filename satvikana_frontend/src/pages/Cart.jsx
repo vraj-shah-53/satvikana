@@ -306,7 +306,7 @@ const Cart = () => {
             <div className="cart-right-col" style={{ background: 'var(--surface-color)', padding: '35px', borderRadius: '20px', boxShadow: 'var(--shadow-custom)', border: '2px solid var(--border-color)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '2px solid var(--border-color)', paddingBottom: '12px', marginBottom: '15px' }}>
                 <div>
-                  <h2 style={{ margin: 0, color: 'var(--primary-color)', fontSize: '1.5rem' }}>Checkout & Delivery</h2>
+                  <h2 style={{ margin: 0, color: 'var(--primary-color)', fontSize: '1.5rem' }}>Checkout <span className="amp">&</span> Delivery</h2>
                   <span style={{ fontSize: '0.8rem', color: '#2E7D32', fontWeight: '700' }}>
                     ● Quick Guest Checkout (Direct Order)
                   </span>
@@ -403,14 +403,14 @@ const Cart = () => {
                     </span>
                   </div>
                   <p style={{ margin: '0 0 10px', fontSize: '0.82rem', color: '#047857', lineHeight: '1.4' }}>
-                    All Indian payment modes supported: <strong>UPI (GPay, PhonePe, Paytm, QR), Cards & Netbanking</strong>.
+                    All Indian payment modes supported: <strong>UPI (GPay, PhonePe, Paytm, QR), Cards <span className="amp">&</span> Netbanking</strong>.
                   </p>
                   <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', alignItems: 'center' }}>
                     <span style={{ background: '#FFFFFF', padding: '3px 8px', borderRadius: '6px', fontSize: '0.72rem', fontWeight: '700', color: '#333', border: '1px solid #D1FAE5' }}>UPI Apps</span>
                     <span style={{ background: '#FFFFFF', padding: '3px 8px', borderRadius: '6px', fontSize: '0.72rem', fontWeight: '700', color: '#333', border: '1px solid #D1FAE5' }}>Google Pay</span>
                     <span style={{ background: '#FFFFFF', padding: '3px 8px', borderRadius: '6px', fontSize: '0.72rem', fontWeight: '700', color: '#333', border: '1px solid #D1FAE5' }}>PhonePe</span>
                     <span style={{ background: '#FFFFFF', padding: '3px 8px', borderRadius: '6px', fontSize: '0.72rem', fontWeight: '700', color: '#333', border: '1px solid #D1FAE5' }}>Paytm</span>
-                    <span style={{ background: '#FFFFFF', padding: '3px 8px', borderRadius: '6px', fontSize: '0.72rem', fontWeight: '700', color: '#333', border: '1px solid #D1FAE5' }}>Cards & Netbanking</span>
+                    <span style={{ background: '#FFFFFF', padding: '3px 8px', borderRadius: '6px', fontSize: '0.72rem', fontWeight: '700', color: '#333', border: '1px solid #D1FAE5' }}>Cards <span className="amp">&</span> Netbanking</span>
                   </div>
                 </div>
 
@@ -481,7 +481,7 @@ const Cart = () => {
             </div>
             
             <h2 style={{ fontSize: '1.8rem', color: 'var(--primary-color)', marginBottom: '8px', fontFamily: "'Playfair Display', serif" }}>
-              Order Confirmed & Paid!
+              Order Confirmed <span className="amp">&</span> Paid!
             </h2>
             <p style={{ color: '#2E7D32', fontSize: '0.95rem', fontWeight: '700', marginBottom: '20px' }}>
               Thank you {confirmedOrder?.name || 'Customer'}! Your order has been placed with Satvikana.

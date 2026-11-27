@@ -22,7 +22,7 @@ export const FALLBACK_PRODUCTS = [
   },
   {
     "id": 143,
-    "name": "Cream N Onion 70g | Gluten Free | No Added Preservatives | Rich in Protein & Calcium | Healthy Superfood Snack",
+    "name": "Cream & Onion 70g | Gluten Free | No Added Preservatives | Rich in Protein & Calcium | Healthy Superfood Snack",
     "description": "Experience the rich crunch of Cream & Onion Roasted Makhana. 100% natural, roasted to perfection, and coated with sour cream and fresh onion flavors. A perfect guilt-free snack for every occasion.",
     "price": "189.00",
     "original_price": "199.00",

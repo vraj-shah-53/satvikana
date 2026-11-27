@@ -47,7 +47,7 @@ const Header = () => {
   return (
     <header className="header">
       <div className="top-bar">
-        Welcome to Satvikana - Discover the Pure & Natural Goodness of Premium Makhana
+        Welcome to Satvikana - Discover the Pure <span className="amp">&</span> Natural Goodness of Premium Makhana
       </div>
       
       <div className="header-main">

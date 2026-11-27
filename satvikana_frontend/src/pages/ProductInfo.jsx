@@ -24,7 +24,7 @@ const ProductInfo = () => {
       background: 'linear-gradient(180deg, #F9F6F0 0%, #F3ECE1 100%)',
       minHeight: '100vh',
       padding: '30px 16px 80px',
-      fontFamily: "'Outfit', -apple-system, BlinkMacSystemFont, sans-serif",
+      fontFamily: "'ProperAmpersand', 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif",
       color: '#2B3329'
     }}>
       <div style={{ maxWidth: '780px', margin: '0 auto' }}>
@@ -64,8 +64,8 @@ const ProductInfo = () => {
             </span>
           </div>
 
-          <h1 style={{ margin: '0 0 10px', fontSize: '2.1rem', fontWeight: '800', letterSpacing: '-0.5px' }}>
-            Statutory & Product Compliance
+          <h1 style={{ margin: '0 0 10px', fontSize: '2.1rem', fontWeight: '700', fontFamily: "'Playfair Display', Georgia, serif", letterSpacing: '-0.3px' }}>
+            Statutory <span className="amp">&</span> Product Compliance
           </h1>
           <p style={{ margin: 0, fontSize: '0.98rem', color: 'rgba(255, 255, 255, 0.9)', maxWidth: '540px', margin: '0 auto', lineHeight: '1.5' }}>
             Official packaging disclosures, statutory licensing, manufacturer information, and quality parameters.
@@ -146,7 +146,8 @@ const ProductInfo = () => {
           <h2 style={{
             margin: '0 0 20px',
             fontSize: '1.25rem',
-            fontWeight: '800',
+            fontWeight: '700',
+            fontFamily: "'Playfair Display', Georgia, serif",
             color: '#1E4620',
             display: 'flex',
             alignItems: 'center',
@@ -155,7 +156,7 @@ const ProductInfo = () => {
             paddingBottom: '12px'
           }}>
             <Building2 size={22} color="#D48806" />
-            Manufacturer & Regulatory Disclosures
+            Manufacturer <span className="amp">&</span> Regulatory Disclosures
           </h2>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '18px' }}>
@@ -172,7 +173,7 @@ const ProductInfo = () => {
             {/* Firm Name */}
             <div style={{ background: '#FAF8F5', padding: '14px 16px', borderRadius: '12px', border: '1px solid #ECE7DE' }}>
               <span style={{ fontSize: '0.78rem', textTransform: 'uppercase', color: '#7A8277', fontWeight: '700', letterSpacing: '0.5px' }}>
-                Marketed & Packed By (Firm Name)
+                Marketed <span className="amp">&</span> Packed By (Firm Name)
               </span>
               <p style={{ margin: '3px 0 0', fontSize: '1.2rem', fontWeight: '800', color: '#1E4620' }}>
                 Diyaja Ventures
@@ -245,7 +246,8 @@ const ProductInfo = () => {
           <h2 style={{
             margin: '0 0 20px',
             fontSize: '1.25rem',
-            fontWeight: '800',
+            fontWeight: '700',
+            fontFamily: "'Playfair Display', Georgia, serif",
             color: '#1E4620',
             display: 'flex',
             alignItems: 'center',
@@ -254,7 +256,7 @@ const ProductInfo = () => {
             paddingBottom: '12px'
           }}>
             <Phone size={22} color="#D48806" />
-            Customer Support & Grievance Redressal
+            Customer Support <span className="amp">&</span> Grievance Redressal
           </h2>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '14px' }}>
@@ -358,7 +360,8 @@ const ProductInfo = () => {
           <h2 style={{
             margin: '0 0 20px',
             fontSize: '1.25rem',
-            fontWeight: '800',
+            fontWeight: '700',
+            fontFamily: "'Playfair Display', Georgia, serif",
             color: '#1E4620',
             display: 'flex',
             alignItems: 'center',
@@ -367,7 +370,7 @@ const ProductInfo = () => {
             paddingBottom: '12px'
           }}>
             <Sparkles size={22} color="#D48806" />
-            Product Specifications & Nutrition Guide
+            Product Specifications <span className="amp">&</span> Nutrition Guide
           </h2>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -405,7 +408,7 @@ const ProductInfo = () => {
 
             <div style={{ background: '#FAF8F5', padding: '14px 16px', borderRadius: '12px', marginTop: '6px' }}>
               <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', color: '#7A8277', fontWeight: '800' }}>
-                Storage & Handling Instructions:
+                Storage <span className="amp">&</span> Handling Instructions:
               </span>
               <p style={{ margin: '4px 0 0', fontSize: '0.9rem', color: '#555', lineHeight: '1.5' }}>
                 Store in a cool, hygienic, and dry place. Keep away from direct sunlight, high heat, and humidity. Once opened, keep the jar tightly sealed to maintain maximum crunch and freshness.
@@ -450,7 +453,7 @@ const ProductInfo = () => {
             <ArrowRight size={22} />
           </Link>
           <p style={{ margin: '12px 0 0', fontSize: '0.88rem', color: 'var(--text-secondary)' }}>
-            Explore all freshly roasted flavours & order online with fast doorstep delivery.
+            Explore all freshly roasted flavours <span className="amp">&</span> order online with fast doorstep delivery.
           </p>
         </div>
 

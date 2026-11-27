@@ -29,7 +29,7 @@
 
 .featured-header .section-title {
   font-size: 2.2rem;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Playfair Display', 'ProperAmpersand', Georgia, serif;
   color: var(--primary-color, #2F5233);
   margin-bottom: 8px;
   letter-spacing: -0.5px;
@@ -186,7 +186,7 @@
 
 .featured-product-title {
   font-size: 1.02rem;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'ProperAmpersand', 'Outfit', sans-serif;
   font-weight: 700;
   color: #1A1A1A;
   margin: 0 0 3px;
@@ -244,7 +244,7 @@
   font-size: 1.25rem;
   font-weight: 800;
   color: var(--accent-color, #D48806);
-  font-family: 'Outfit', sans-serif;
+  font-family: 'ProperAmpersand', 'Outfit', sans-serif;
 }
 
 .featured-original-price {
@@ -280,7 +280,7 @@
   gap: 8px;
   transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
   box-shadow: 0 3px 8px rgba(47, 82, 51, 0.18);
-  font-family: 'Outfit', sans-serif;
+  font-family: 'ProperAmpersand', 'Outfit', sans-serif;
 }
 
 .featured-add-btn:hover {
@@ -316,7 +316,7 @@
   border-radius: 30px;
   font-size: 1.05rem;
   font-weight: 700;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'ProperAmpersand', 'Outfit', sans-serif;
   text-decoration: none;
   cursor: pointer;
   transition: all 0.28s cubic-bezier(0.25, 0.8, 0.25, 1);

@@ -365,7 +365,7 @@ const AdminOrders = () => {
             Authorized Sign In
           </h2>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '25px', lineHeight: '1.5' }}>
-            Secure order & payment management dashboard for Satvikana store owners.
+            Secure order <span className="amp">&</span> payment management dashboard for Satvikana store owners.
           </p>
 
           {/* Alert if logged in as a regular customer */}
@@ -503,7 +503,7 @@ const AdminOrders = () => {
         <div style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: '15px' }}>
           <RefreshCw size={36} className="spin-icon" style={{ color: 'var(--primary-color)' }} />
           <h2 style={{ fontSize: '1.4rem', color: 'var(--primary-color)', margin: 0 }}>
-            Syncing Customer Orders & Payments...
+            Syncing Customer Orders <span className="amp">&</span> Payments...
           </h2>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', margin: 0 }}>
             Connecting securely to Satvikana database
@@ -603,7 +603,7 @@ const AdminOrders = () => {
               fontFamily: 'Outfit, sans-serif', 
               fontWeight: '800' 
             }}>
-              Order & Payment <span style={{ color: 'var(--accent-color)' }}>Management</span>
+              Order <span className="amp">&</span> Payment <span style={{ color: 'var(--accent-color)' }}>Management</span>
             </h1>
             <p style={{ margin: '4px 0 0', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
               Logged in as: <strong style={{ color: '#1A1A1A' }}>{currentUser.email || currentUser.username}</strong>
@@ -1223,7 +1223,7 @@ const AdminOrders = () => {
                         alignItems: 'center', 
                         gap: '6px' 
                       }}>
-                        <CreditCard size={16} /> Payment & Gateway Details
+                        <CreditCard size={16} /> Payment <span className="amp">&</span> Gateway Details
                       </h4>
                       <p style={{ margin: '4px 0', fontSize: '0.88rem', color: '#2B3329' }}>
                         <strong>Method:</strong> {order.payment_method || 'UPI'}

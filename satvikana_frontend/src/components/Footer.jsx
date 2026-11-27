@@ -72,7 +72,7 @@ const Footer = () => {
             Satvikana
           </h2>
           <p style={{ color: mutedBeige, fontSize: '0.95rem', lineHeight: '1.6', marginBottom: '25px', maxWidth: '320px' }}>
-            Pure, natural & organic food products crafted for healthy living. From farm to your table — with love.
+            Pure, natural <span className="amp">&</span> organic food products crafted for healthy living. From farm to your table — with love.
           </p>
           <div style={{ display: 'flex', gap: '12px' }}>
             <a 
@@ -160,7 +160,7 @@ const Footer = () => {
             onMouseEnter={(e) => handleLinkHover(e, true)}
             onMouseLeave={(e) => handleLinkHover(e, false)}
           >
-            FAQ & Help
+            FAQ <span className="amp">&</span> Help
           </Link>
           <Link 
             to="/auth" 
@@ -228,7 +228,7 @@ const Footer = () => {
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: mutedBeige, fontSize: '0.9rem' }}>
               <Star size={16} style={{ color: accentGold }} />
-              <span>100% Natural & Organic</span>
+              <span>100% Natural <span className="amp">&</span> Organic</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: mutedBeige, fontSize: '0.9rem' }}>
               <RotateCcw size={16} style={{ color: accentGold }} />

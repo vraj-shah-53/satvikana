@@ -36,11 +36,11 @@ const Contact = () => {
           
           <div>
             <h3 style={{ color: 'var(--accent-color)', fontSize: '1.4rem', marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <Building2 size={24} /> B2B & Bulk Orders
+              <Building2 size={24} /> B2B <span className="amp">&</span> Bulk Orders
             </h3>
             <p style={{ fontSize: '1.1rem', lineHeight: '1.6', opacity: 0.9 }}>
               <strong>For Bulk Orders, please contact us directly.</strong><br/>
-              Dealers & Distributors are Welcome.
+              Dealers <span className="amp">&</span> Distributors are Welcome.
             </p>
           </div>
 
