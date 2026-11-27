@@ -165,7 +165,7 @@ const ProductInfo = () => {
               <span style={{ fontSize: '0.78rem', textTransform: 'uppercase', color: '#7A8277', fontWeight: '700', letterSpacing: '0.5px' }}>
                 Brand Name
               </span>
-              <p style={{ margin: '3px 0 0', fontSize: '1.15rem', fontWeight: '800', color: '#1E4620' }}>
+              <p style={{ margin: '3px 0 0', fontSize: '1.2rem', fontWeight: '800', color: '#1E4620' }}>
                 Satvikana
               </p>
             </div>
@@ -175,8 +175,18 @@ const ProductInfo = () => {
               <span style={{ fontSize: '0.78rem', textTransform: 'uppercase', color: '#7A8277', fontWeight: '700', letterSpacing: '0.5px' }}>
                 Marketed & Packed By (Firm Name)
               </span>
-              <p style={{ margin: '3px 0 0', fontSize: '1.15rem', fontWeight: '800', color: '#1E4620' }}>
+              <p style={{ margin: '3px 0 0', fontSize: '1.2rem', fontWeight: '800', color: '#1E4620' }}>
                 Diyaja Ventures
+              </p>
+            </div>
+
+            {/* Manufacturer Name */}
+            <div style={{ background: '#FAF8F5', padding: '14px 16px', borderRadius: '12px', border: '1px solid #ECE7DE' }}>
+              <span style={{ fontSize: '0.78rem', textTransform: 'uppercase', color: '#7A8277', fontWeight: '700', letterSpacing: '0.5px' }}>
+                Manufacturer Name
+              </span>
+              <p style={{ margin: '3px 0 0', fontSize: '1.2rem', fontWeight: '800', color: '#1E4620' }}>
+                Flavoures mukhvas
               </p>
             </div>
 
@@ -185,22 +195,21 @@ const ProductInfo = () => {
               background: '#FFFDE7', 
               padding: '14px 16px', 
               borderRadius: '12px', 
-              border: '1.5px solid #FFF59D',
-              gridColumn: '1 / -1'
+              border: '1.5px solid #FFF59D'
             }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px' }}>
                 <span style={{ fontSize: '0.78rem', textTransform: 'uppercase', color: '#827717', fontWeight: '800', letterSpacing: '0.8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <Award size={16} /> Food Safety Standard Authority of India (FSSAI)
+                  <Award size={16} /> FSSAI License Number
                 </span>
                 <span style={{ background: '#2E7D32', color: '#FFFFFF', fontSize: '0.72rem', fontWeight: '800', padding: '2px 8px', borderRadius: '10px' }}>
                   CERTIFIED
                 </span>
               </div>
-              <p style={{ margin: '6px 0 2px', fontSize: '1.3rem', fontWeight: '900', color: '#33691E', letterSpacing: '1px' }}>
-                Lic. No.: 20724031000845
+              <p style={{ margin: '6px 0 2px', fontSize: '1.35rem', fontWeight: '900', color: '#33691E', letterSpacing: '1.5px' }}>
+                10722026000979
               </p>
               <p style={{ margin: 0, fontSize: '0.8rem', color: '#689F38' }}>
-                Manufactured & Packed under strict statutory FSSAI hygiene guidelines.
+                Food Safety and Standards Authority of India
               </p>
             </div>
 
@@ -215,11 +224,11 @@ const ProductInfo = () => {
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '6px' }}>
                 <MapPin size={17} color="#D48806" />
                 <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', color: '#7A8277', fontWeight: '700' }}>
-                  Manufacturer & Processing Facility Address
+                  Manufacturer Address
                 </span>
               </div>
-              <p style={{ margin: 0, fontSize: '1rem', fontWeight: '600', color: '#2B3329', lineHeight: '1.6' }}>
-                Shaligram, Nikol, Ahmedabad – 382350, Gujarat, India.
+              <p style={{ margin: 0, fontSize: '1.05rem', fontWeight: '700', color: '#2B3329', lineHeight: '1.6' }}>
+                321, 3rd Floor, Satyam Mall, Mansi Circle, Satellite, Ahmedabad – 380015, Gujarat, India.
               </p>
             </div>
           </div>
