@@ -41,6 +41,16 @@ const ROUTE_SEO = {
     title: 'Your Shopping Cart | Satvikana Makhana Store',
     description: 'Review your Satvikana cart and proceed to instant guest checkout with Cashfree UPI, Cards, and Netbanking.',
     canonical: 'https://satvikana.com/cart'
+  },
+  '/verify': {
+    title: 'Product Information & Statutory Compliance | Satvikana',
+    description: 'Official statutory packaging disclosures, FSSAI licensing, manufacturer details, and product information for Satvikana Makhana.',
+    canonical: 'https://satvikana.com/verify'
+  },
+  '/product-info': {
+    title: 'Product Information & Statutory Compliance | Satvikana',
+    description: 'Official statutory packaging disclosures, FSSAI licensing, manufacturer details, and product information for Satvikana Makhana.',
+    canonical: 'https://satvikana.com/product-info'
   }
 };
 

@@ -13,6 +13,7 @@ import Auth from './pages/Auth';
 import Cart from './pages/Cart';
 import OrderHistory from './pages/OrderHistory';
 import AdminOrders from './pages/AdminOrders';
+import ProductInfo from './pages/ProductInfo';
 import { CartProvider } from './CartContext';
 import './App.css';
 
@@ -38,6 +39,9 @@ function App() {
               <Route path="/admin-orders" element={<AdminOrders />} />
               <Route path="/admin-portal" element={<AdminOrders />} />
               <Route path="/admin" element={<AdminOrders />} />
+              {/* Unlisted Packaging & QR Code Verification Page */}
+              <Route path="/verify" element={<ProductInfo />} />
+              <Route path="/product-info" element={<ProductInfo />} />
             </Routes>
           </main>
           <Footer />
